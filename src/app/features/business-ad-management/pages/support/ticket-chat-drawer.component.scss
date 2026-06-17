@@ -1,0 +1,307 @@
+/* ── Overlay ─────────────────────────────────────── */
+.tcd-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.4);
+  z-index: 200;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ── Panel ───────────────────────────────────────── */
+.tcd-panel {
+  width: 400px;
+  max-width: 100vw;
+  height: 100%;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.12);
+  animation: tcd-slide-in 0.22s ease-out;
+}
+
+@keyframes tcd-slide-in {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+
+/* ── Header ──────────────────────────────────────── */
+.tcd-header {
+  padding: 20px 20px 16px;
+  flex-shrink: 0;
+}
+
+.tcd-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.tcd-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tcd-ticket-id {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #64748b;
+  letter-spacing: 0.02em;
+}
+
+/* Status badge */
+.tcd-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px 3px 8px;
+  border-radius: 20px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  border: 1px solid;
+
+  &::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  &.tcd-status--open {
+    color: #d97706;
+    border-color: #fde68a;
+    background: #fefce8;
+    &::before { background: #f59e0b; }
+  }
+
+  &.tcd-status--in-progress {
+    color: #1d4ed8;
+    border-color: #bfdbfe;
+    background: #eff6ff;
+    &::before { background: #3b82f6; }
+  }
+
+  &.tcd-status--resolved {
+    color: #16a34a;
+    border-color: #bbf7d0;
+    background: #f0fdf4;
+    &::before { background: #16a34a; }
+  }
+
+  &.tcd-status--closed {
+    color: #64748b;
+    border-color: #e2e8f0;
+    background: #f8fafc;
+    &::before { background: #94a3b8; }
+  }
+}
+
+/* Priority badge */
+.tcd-priority-badge {
+  display: inline-flex;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 0.76rem;
+  font-weight: 600;
+
+  &.tcd-priority--high   { background: #fef2f2; color: #dc2626; }
+  &.tcd-priority--medium { background: #fefce8; color: #ca8a04; }
+  &.tcd-priority--low    { background: #f8fafc; color: #64748b; }
+}
+
+.tcd-close-x {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #f8fafc;
+  color: #64748b;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.12s;
+
+  &:hover { background: #f1f5f9; }
+}
+
+.tcd-subject {
+  margin: 0 0 5px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.3;
+}
+
+.tcd-meta {
+  margin: 0;
+  font-size: 0.78rem;
+  color: #94a3b8;
+}
+
+.tcd-divider {
+  height: 1px;
+  background: #f1f5f9;
+  flex-shrink: 0;
+}
+
+/* ── Scrollable Body ─────────────────────────────── */
+.tcd-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &::-webkit-scrollbar { display: none; }
+}
+
+/* ── Issue Description Card ──────────────────────── */
+.tcd-desc-card {
+  background: #f8fafc;
+  border: 1px solid #f1f5f9;
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tcd-desc-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #94a3b8;
+  letter-spacing: 0.1em;
+}
+
+.tcd-desc-text {
+  margin: 0;
+  font-size: 0.83rem;
+  color: #334155;
+  line-height: 1.55;
+}
+
+.tcd-campaign-link {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #f97316;
+  cursor: pointer;
+
+  &:hover { text-decoration: underline; }
+}
+
+/* ── Messages ────────────────────────────────────── */
+.tcd-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tcd-msg-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+
+  &--user {
+    align-items: flex-end;
+  }
+}
+
+.tcd-msg-meta {
+  font-size: 0.73rem;
+  color: #94a3b8;
+  padding: 0 4px;
+}
+
+.tcd-bubble {
+  max-width: 84%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: #334155;
+  background: #f1f5f9;
+  border-bottom-left-radius: 4px;
+
+  &--user {
+    background: #f97316;
+    color: #ffffff;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 4px;
+  }
+}
+
+/* ── Footer ──────────────────────────────────────── */
+.tcd-footer {
+  border-top: 1px solid #f1f5f9;
+  padding: 14px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.tcd-reply-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  font-size: 0.84rem;
+  color: #334155;
+  font-family: inherit;
+  line-height: 1.55;
+  background: transparent;
+  box-sizing: border-box;
+
+  &::placeholder { color: #94a3b8; }
+}
+
+.tcd-footer-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tcd-attach-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #475569;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+
+  &:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+  }
+}
+
+.tcd-send-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 18px;
+  background: #f97316;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover { background: #ea580c; }
+}

@@ -1,0 +1,122 @@
+<!-- Backdrop -->
+<div class="ctm-overlay" (click)="close()">
+
+  <!-- Modal panel -->
+  <div class="ctm-modal" (click)="$event.stopPropagation()">
+
+    <!-- ── Header ──────────────────────────────────── -->
+    <div class="ctm-header">
+      <div>
+        <h2 class="ctm-title">Create Support Ticket</h2>
+        <p class="ctm-sub">We respond within 24 business hours.</p>
+      </div>
+      <button class="ctm-close-x" (click)="close()" type="button">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- ── Body ────────────────────────────────────── -->
+    <form class="ctm-body" [formGroup]="form" (ngSubmit)="submit()">
+
+      <!-- CATEGORY -->
+      <div class="ctm-field">
+        <span class="ctm-label">CATEGORY <span class="ctm-required">*</span></span>
+        <div class="ctm-category-grid">
+          @for (cat of categories; track cat) {
+            <button
+              type="button"
+              class="ctm-category-card"
+              [class.ctm-category-card--selected]="selectedCategory === cat"
+              (click)="selectCategory(cat)">
+              {{ cat }}
+            </button>
+          }
+        </div>
+        @if (categoryTouched && !selectedCategory) {
+          <span class="ctm-error-msg">Please select a category</span>
+        }
+      </div>
+
+      <!-- PRIORITY -->
+      <div class="ctm-field">
+        <span class="ctm-label">PRIORITY</span>
+        <div class="ctm-priority-group">
+          @for (p of priorities; track p) {
+            <button
+              type="button"
+              class="ctm-priority-btn"
+              [class.ctm-priority-btn--selected]="selectedPriority === p"
+              (click)="selectPriority(p)">
+              {{ p }}
+            </button>
+          }
+        </div>
+      </div>
+
+      <!-- SUBJECT -->
+      <div class="ctm-field">
+        <label class="ctm-label" for="ctm-subject">
+          SUBJECT <span class="ctm-required">*</span>
+        </label>
+        <input
+          id="ctm-subject"
+          type="text"
+          class="ctm-input"
+          [class.ctm-input--error]="isInvalid('subject')"
+          placeholder="Brief summary of your issue"
+          formControlName="subject" />
+        @if (isInvalid('subject')) {
+          <span class="ctm-error-msg">Subject is required</span>
+        }
+      </div>
+
+      <!-- RELATED CAMPAIGN -->
+      <div class="ctm-field">
+        <label class="ctm-label" for="ctm-campaign">
+          RELATED CAMPAIGN <span class="ctm-optional">(optional)</span>
+        </label>
+        <input
+          id="ctm-campaign"
+          type="text"
+          class="ctm-input"
+          formControlName="relatedCampaign" />
+      </div>
+
+      <!-- DESCRIPTION -->
+      <div class="ctm-field">
+        <label class="ctm-label" for="ctm-desc">
+          DESCRIPTION <span class="ctm-required">*</span>
+        </label>
+        <textarea
+          id="ctm-desc"
+          class="ctm-textarea"
+          [class.ctm-textarea--error]="isInvalid('description')"
+          placeholder="Describe the issue in detail. Include error messages, steps to reproduce, or screenshots."
+          formControlName="description"
+          rows="4">
+        </textarea>
+        @if (isInvalid('description')) {
+          <span class="ctm-error-msg">Description is required</span>
+        }
+      </div>
+
+    </form>
+
+    <!-- ── Footer ──────────────────────────────────── -->
+    <div class="ctm-footer">
+      <button class="ctm-cancel-btn" type="button" (click)="close()">Cancel</button>
+      <button class="ctm-submit-btn" type="button" (click)="submit()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+          <path d="M22 2L11 13" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M22 2L15 22 11 13 2 9l20-7z" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Submit Ticket
+      </button>
+    </div>
+
+  </div>
+</div>

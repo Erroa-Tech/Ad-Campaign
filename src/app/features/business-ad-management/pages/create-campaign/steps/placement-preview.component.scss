@@ -1,0 +1,492 @@
+.pp-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+}
+
+/* ── Phone Frame ─────────────────────────────── */
+.pp-phone {
+  width: 148px;
+  background: #0f172a;
+  border-radius: 26px;
+  padding: 10px 6px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.18);
+  flex-shrink: 0;
+}
+
+.pp-speaker {
+  width: 42px;
+  height: 5px;
+  background: #334155;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.pp-screen {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  background: #f8fafc;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Empty State ─────────────────────────────── */
+.pp-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+}
+
+.pp-empty-text {
+  margin: 0;
+  font-size: 0.55rem;
+  color: #94a3b8;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* ── Caption ─────────────────────────────────── */
+.pp-caption {
+  margin: 0;
+  font-size: 0.72rem;
+  color: #64748b;
+  text-align: center;
+  line-height: 1.4;
+
+  &.pp-caption--empty { color: #94a3b8; }
+}
+
+/* ═══════════════════════════════════════════════
+   STATUS FEED AD PREVIEW
+   ═══════════════════════════════════════════════ */
+.pp-sf {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #f8fafc;
+  overflow: hidden;
+}
+
+/* App bar */
+.pp-sf-bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 7px 4px;
+  background: #ffffff;
+  border-bottom: 0.5px solid #f1f5f9;
+  flex-shrink: 0;
+}
+
+.pp-sf-logo {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  background: #f97316;
+  color: #ffffff;
+  font-size: 0.48rem;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.pp-sf-app-name {
+  flex: 1;
+  font-size: 0.5rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* Stories row */
+.pp-sf-stories {
+  display: flex;
+  gap: 4px;
+  padding: 5px 7px 4px;
+  background: #ffffff;
+  flex-shrink: 0;
+}
+
+.pp-sf-story {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  flex-shrink: 0;
+
+  &.pp-sf-story--you {
+    background: #f97316;
+    border: 1.5px solid #ffffff;
+    box-shadow: 0 0 0 1.5px #f97316;
+  }
+
+  &.pp-sf-story--grey {
+    background: #e2e8f0;
+  }
+}
+
+/* Ad card */
+.pp-sf-ad {
+  margin: 4px 5px;
+  border-radius: 6px;
+  background: #ffffff;
+  border: 0.5px solid #e9edf5;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.pp-sf-ad-meta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 6px 2px;
+}
+
+.pp-sf-ad-badge {
+  font-size: 0.44rem;
+  font-weight: 700;
+  color: #64748b;
+  border: 0.5px solid #cbd5e1;
+  border-radius: 2px;
+  padding: 0 2px;
+  line-height: 1.6;
+}
+
+.pp-sf-ad-sponsor {
+  font-size: 0.44rem;
+  color: #94a3b8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Ad image area */
+.pp-sf-ad-image {
+  width: 100%;
+  height: 38px;
+  background: #f97316;
+  display: grid;
+  place-items: center;
+}
+
+/* Ad body */
+.pp-sf-ad-body {
+  padding: 4px 6px 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pp-sf-ad-title {
+  margin: 0;
+  font-size: 0.52rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.pp-sf-ad-sub {
+  margin: 0;
+  font-size: 0.44rem;
+  color: #94a3b8;
+}
+
+.pp-sf-ad-cta {
+  margin-top: 3px;
+  width: 100%;
+  padding: 3px 0;
+  background: #f97316;
+  border: none;
+  border-radius: 3px;
+  color: #ffffff;
+  font-size: 0.48rem;
+  font-weight: 700;
+  cursor: default;
+}
+
+/* Feed row placeholder */
+.pp-sf-feed-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 6px;
+  flex-shrink: 0;
+}
+
+.pp-sf-feed-avatar {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  flex-shrink: 0;
+}
+
+.pp-sf-feed-lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.pp-sf-feed-line {
+  height: 4px;
+  background: #e2e8f0;
+  border-radius: 2px;
+  width: 60%;
+
+  &.pp-sf-feed-line--wide { width: 85%; }
+}
+
+/* ═══════════════════════════════════════════════
+   FULL SCREEN AD PREVIEW
+   ═══════════════════════════════════════════════ */
+.pp-fs {
+  width: 100%;
+  height: 100%;
+  background: #f97316;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.pp-fs-ad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 16px;
+}
+
+.pp-fs-title {
+  margin: 0;
+  font-size: 0.58rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-align: center;
+}
+
+.pp-fs-sub {
+  margin: 0;
+  font-size: 0.46rem;
+  color: rgba(255, 255, 255, 0.75);
+  text-align: center;
+}
+
+.pp-fs-cta {
+  margin-top: 4px;
+  padding: 4px 12px;
+  background: #ffffff;
+  border: none;
+  border-radius: 20px;
+  color: #f97316;
+  font-size: 0.48rem;
+  font-weight: 700;
+  cursor: default;
+}
+
+.pp-fs-skip {
+  position: absolute;
+  top: 7px;
+  right: 8px;
+  font-size: 0.44rem;
+  color: rgba(255, 255, 255, 0.65);
+  background: rgba(0, 0, 0, 0.2);
+  padding: 2px 5px;
+  border-radius: 10px;
+}
+
+/* ═══════════════════════════════════════════════
+   CALL SCREEN AD PREVIEW
+   ═══════════════════════════════════════════════ */
+.pp-cs {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 8px 8px;
+}
+
+.pp-cs-call {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.pp-cs-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #f97316;
+  color: #ffffff;
+  font-size: 0.52rem;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.25);
+}
+
+.pp-cs-name {
+  margin: 0;
+  font-size: 0.44rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.pp-cs-sub {
+  margin: 0;
+  font-size: 0.54rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.pp-cs-ad {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 0.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 6px;
+}
+
+.pp-cs-ad-badge {
+  font-size: 0.42rem;
+  font-weight: 700;
+  color: #f97316;
+  border: 0.5px solid #f97316;
+  border-radius: 2px;
+  padding: 0 2px;
+}
+
+.pp-cs-ad-content { flex: 1; }
+
+.pp-cs-ad-title {
+  margin: 0;
+  font-size: 0.48rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.pp-cs-ad-sub {
+  margin: 0;
+  font-size: 0.42rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.pp-cs-ad-cta {
+  padding: 2px 6px;
+  background: #f97316;
+  border: none;
+  border-radius: 3px;
+  color: #ffffff;
+  font-size: 0.44rem;
+  font-weight: 700;
+  cursor: default;
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════
+   BANNER AD PREVIEW
+   ═══════════════════════════════════════════════ */
+.pp-bn {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #f8fafc;
+  position: relative;
+}
+
+.pp-bn-bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 7px;
+  background: #ffffff;
+  border-bottom: 0.5px solid #f1f5f9;
+  flex-shrink: 0;
+}
+
+.pp-bn-logo {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  background: #f97316;
+  color: #ffffff;
+  font-size: 0.46rem;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+}
+
+.pp-bn-app {
+  font-size: 0.5rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.pp-bn-content {
+  flex: 1;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.pp-bn-line {
+  height: 5px;
+  background: #e2e8f0;
+  border-radius: 2px;
+  width: 55%;
+
+  &.pp-bn-line--wide { width: 85%; }
+  &.pp-bn-line--mid  { width: 70%; }
+}
+
+/* Banner ad strip at top (below app bar) */
+.pp-bn-ad {
+  position: absolute;
+  top: 25px;
+  left: 0;
+  right: 0;
+  background: #f97316;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 7px;
+}
+
+.pp-bn-ad-badge {
+  font-size: 0.42rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  padding: 0 3px;
+  flex-shrink: 0;
+}
+
+.pp-bn-ad-text {
+  font-size: 0.44rem;
+  color: #ffffff;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

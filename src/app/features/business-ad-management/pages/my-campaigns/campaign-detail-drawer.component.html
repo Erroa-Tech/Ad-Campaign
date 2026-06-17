@@ -1,0 +1,233 @@
+<!-- Backdrop -->
+<div class="cdd-overlay" (click)="close()">
+
+  <!-- Drawer Panel -->
+  <aside class="cdd-panel" (click)="$event.stopPropagation()">
+
+    <!-- ── Sticky Header ──────────────────────────── -->
+    <div class="cdd-header">
+      <div class="cdd-header-top">
+        <span class="cdd-section-label">CAMPAIGN DETAILS</span>
+        <button class="cdd-close-x" (click)="close()">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+            <path d="M2 2l9 9M11 2L2 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <h2 class="cdd-campaign-title">{{ campaign.name }}</h2>
+      <div class="cdd-badge-row">
+        <span class="cdd-status-badge">
+          <span class="cdd-dot {{ statusDotClass(campaign.status) }}"></span>
+          {{ campaign.status }}
+        </span>
+        <span class="cdd-badge-sep">|</span>
+        <span class="cdd-placement-chip">{{ campaign.placement }}</span>
+      </div>
+    </div>
+
+    <!-- ── Scrollable Body ────────────────────────── -->
+    <div class="cdd-body">
+
+      <!-- AD PREVIEW -->
+      <div class="cdd-section">
+        <span class="cdd-section-label">AD PREVIEW</span>
+        <div class="cdd-preview-card">
+          <div class="cdd-preview-thumb">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <rect x="2" y="5" width="20" height="14" rx="2" stroke="#f97316" stroke-width="1.5"/>
+              <circle cx="8" cy="10" r="2" stroke="#f97316" stroke-width="1.3"/>
+              <path d="M2 16.5l5-5 4 4 3.5-3.5L21 19" stroke="#f97316" stroke-width="1.3" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="cdd-preview-info">
+            <span class="cdd-preview-name">{{ campaign.name }}</span>
+            <p class="cdd-preview-desc">{{ campaign.description }}</p>
+            <div class="cdd-preview-chips">
+              <span class="cdd-chip">{{ campaign.placement }}</span>
+              <span class="cdd-chip">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+                  <rect x="1" y="2" width="9" height="7" rx="1" stroke="#64748b" stroke-width="1.1"/>
+                  <circle cx="3.5" cy="4.5" r="1" fill="#64748b"/>
+                  <path d="M1 8l2.5-2.5 2 2 2-2.5L11 8" stroke="#64748b" stroke-width="0.9"/>
+                </svg>
+                Image
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PERFORMANCE -->
+      <div class="cdd-section">
+        <span class="cdd-section-label">PERFORMANCE</span>
+        <div class="cdd-stats-grid">
+
+          <div class="cdd-stat">
+            <div class="cdd-stat-icon cdd-stat-icon--reach">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <circle cx="8" cy="5.5" r="2.5" stroke="#3b82f6" stroke-width="1.4"/>
+                <path d="M2.5 13.5c0-3 2.5-5 5.5-5s5.5 2 5.5 5" stroke="#3b82f6" stroke-width="1.4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <span class="cdd-stat-value">{{ formatNum(campaign.reach) }}</span>
+            <span class="cdd-stat-label">REACH</span>
+          </div>
+
+          <div class="cdd-stat">
+            <div class="cdd-stat-icon cdd-stat-icon--clicks">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M8 2L5.5 8H8L6.5 14 11.5 7.5H9L11 2H8z"
+                  stroke="#10b981" stroke-width="1.3" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="cdd-stat-value">{{ formatNum(campaign.clicks) }}</span>
+            <span class="cdd-stat-label">CLICKS</span>
+          </div>
+
+          <div class="cdd-stat">
+            <div class="cdd-stat-icon cdd-stat-icon--spend">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <circle cx="8" cy="8" r="6.5" stroke="#f97316" stroke-width="1.3"/>
+                <path d="M8 4v8M6.5 5.5C6.5 4.7 7.2 4 8 4s1.5.7 1.5 1.5c0 2-3 2-3 4 0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5"
+                  stroke="#f97316" stroke-width="1.2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <span class="cdd-stat-value">{{ formatUsd(campaign.spend) }}</span>
+            <span class="cdd-stat-label">SPEND</span>
+          </div>
+
+          <div class="cdd-stat">
+            <div class="cdd-stat-icon cdd-stat-icon--ctr">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M4 12L12 4M12 4H6.5M12 4v5.5"
+                  stroke="#8b5cf6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="cdd-stat-value">{{ ctr }}</span>
+            <span class="cdd-stat-label">CTR</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- BUDGET -->
+      <div class="cdd-section">
+        <span class="cdd-section-label">BUDGET</span>
+        <div class="cdd-budget">
+          <div class="cdd-budget-header">
+            <span class="cdd-budget-title">Budget Used</span>
+            <span class="cdd-budget-amount">{{ formatUsd(campaign.spend) }} of {{ formatUsd(campaign.totalBudget) }}</span>
+          </div>
+          <div class="cdd-progress-track">
+            <div class="cdd-progress-fill" [style.width.%]="budgetPercent"></div>
+          </div>
+          <span class="cdd-budget-sub">{{ budgetPercent }}% used · {{ formatUsd(budgetRemaining) }} remaining</span>
+        </div>
+      </div>
+
+      <!-- CAMPAIGN INFORMATION -->
+      <div class="cdd-section">
+        <span class="cdd-section-label">CAMPAIGN INFORMATION</span>
+        <div class="cdd-info-table">
+          <div class="cdd-info-row">
+            <span class="cdd-info-key">Objective</span>
+            <span class="cdd-info-val">{{ campaign.objective || '—' }}</span>
+          </div>
+          <div class="cdd-info-row">
+            <span class="cdd-info-key">Category</span>
+            <span class="cdd-info-val">{{ campaign.category || '—' }}</span>
+          </div>
+          <div class="cdd-info-row">
+            <span class="cdd-info-key">Description</span>
+            <span class="cdd-info-val cdd-info-val--wrap">{{ campaign.description || '—' }}</span>
+          </div>
+          <div class="cdd-info-row">
+            <span class="cdd-info-key">Created</span>
+            <span class="cdd-info-val">{{ campaign.createdDate || '—' }}</span>
+          </div>
+          <div class="cdd-info-row">
+            <span class="cdd-info-key">Start Date</span>
+            <span class="cdd-info-val">{{ formatDate(campaign.startDate) }}</span>
+          </div>
+          <div class="cdd-info-row cdd-info-row--last">
+            <span class="cdd-info-key">End Date</span>
+            <span class="cdd-info-val">{{ formatDate(campaign.endDate) }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AUDIENCE TARGETING -->
+      <div class="cdd-section">
+        <span class="cdd-section-label">AUDIENCE TARGETING</span>
+        <div class="cdd-info-table">
+          <div class="cdd-info-row">
+            <span class="cdd-info-key">Gender</span>
+            <span class="cdd-info-val">{{ campaign.gender || 'All' }}</span>
+          </div>
+          <div class="cdd-info-row">
+            <span class="cdd-info-key">Age Range</span>
+            <span class="cdd-info-val">{{ campaign.ageRange || '—' }}</span>
+          </div>
+          <div class="cdd-info-row cdd-info-row--last">
+            <span class="cdd-info-key">Location</span>
+            <span class="cdd-info-val">{{ campaign.location || '—' }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACTIVITY TIMELINE -->
+      @if (campaign.timeline?.length) {
+        <div class="cdd-section cdd-section--last">
+          <span class="cdd-section-label">ACTIVITY TIMELINE</span>
+          <div class="cdd-timeline">
+            @for (event of campaign.timeline; track event.date; let last = $last; let first = $first) {
+              <div class="cdd-tl-item" [class.cdd-tl-item--last]="last">
+                <div class="cdd-tl-rail">
+                  <span class="cdd-tl-dot" [class.cdd-tl-dot--active]="first"></span>
+                  @if (!last) { <span class="cdd-tl-line"></span> }
+                </div>
+                <div class="cdd-tl-content">
+                  <span class="cdd-tl-status">{{ event.status }}</span>
+                  @if (event.note) {
+                    <span class="cdd-tl-date">{{ event.date }} · {{ event.note }}</span>
+                  } @else {
+                    <span class="cdd-tl-date">{{ event.date }}</span>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+
+    </div>
+
+    <!-- ── Sticky Footer ──────────────────────────── -->
+    <div class="cdd-footer">
+      @if (showPrimaryAction) {
+        <button class="cdd-action-btn">
+          @if (campaign.status === 'Live') {
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+              <rect x="2" y="1.5" width="3.5" height="10" rx="1" fill="currentColor"/>
+              <rect x="7.5" y="1.5" width="3.5" height="10" rx="1" fill="currentColor"/>
+            </svg>
+          } @else if (campaign.status === 'Paused') {
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+              <path d="M3 2l8 4.5-8 4.5V2z" fill="currentColor"/>
+            </svg>
+          } @else {
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+              <path d="M11.5 1.5L6 7l-3.5-2.5" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11.5 1.5L9 11l-3-4L2 5.5l9.5-4z" stroke="currentColor" stroke-width="1.5"
+                stroke-linejoin="round"/>
+            </svg>
+          }
+          {{ primaryActionLabel }}
+        </button>
+      }
+      <button class="cdd-close-btn" (click)="close()">Close</button>
+    </div>
+
+  </aside>
+</div>

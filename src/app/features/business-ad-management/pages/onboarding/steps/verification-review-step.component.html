@@ -1,0 +1,124 @@
+<div class="vr-container">
+
+  <!-- ── SUBMISSION SUMMARY (full-width) ───────────────── -->
+  <div class="vr-card">
+    <div class="vr-card-top">
+      <span class="vr-section-label">SUBMISSION SUMMARY</span>
+      <button type="button" class="vr-edit-btn" (click)="editInfoRequested.emit()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+          <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Edit Information
+      </button>
+    </div>
+    <div class="vr-card-body">
+      <h3 class="vr-card-title">Advertiser Information</h3>
+      <div class="vr-divider"></div>
+      <div class="vr-summary-grid">
+        <div class="vr-summary-cell">
+          <span class="vr-sum-label">Advertiser Name</span>
+          <span class="vr-sum-value">{{ val('advertiserName') }}</span>
+        </div>
+        <div class="vr-summary-cell">
+          <span class="vr-sum-label">Business Type</span>
+          <span class="vr-sum-value">{{ val('businessType') }}</span>
+        </div>
+        <div class="vr-summary-cell">
+          <span class="vr-sum-label">Industry</span>
+          <span class="vr-sum-value">{{ val('industry') }}</span>
+        </div>
+        <div class="vr-summary-cell">
+          <span class="vr-sum-label">Website</span>
+          <span class="vr-sum-value">{{ val('companyWebsite') }}</span>
+        </div>
+        <div class="vr-summary-cell">
+          <span class="vr-sum-label">Business Email</span>
+          <span class="vr-sum-value">{{ val('businessEmail') }}</span>
+        </div>
+        <div class="vr-summary-cell">
+          <span class="vr-sum-label">Phone</span>
+          <span class="vr-sum-value">{{ val('phoneNumber') }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Two-column row ─────────────────────────────────── -->
+  <div class="vr-two-col">
+
+    <!-- COMPANY DETAILS -->
+    <div class="vr-card">
+      <div class="vr-card-top">
+        <span class="vr-section-label">COMPANY DETAILS</span>
+      </div>
+      <div class="vr-card-body">
+        <h3 class="vr-card-title">Address &amp; tax</h3>
+        <p class="vr-card-desc">Details that appear in finance and compliance records.</p>
+        <div class="vr-divider"></div>
+        <div class="vr-row-list">
+          <div class="vr-info-row">
+            <span class="vr-info-label">Country</span>
+            <span class="vr-info-value">{{ val('country') }}</span>
+          </div>
+          <div class="vr-info-row">
+            <span class="vr-info-label">State / Region</span>
+            <span class="vr-info-value">{{ val('stateRegion') }}</span>
+          </div>
+          <div class="vr-info-row">
+            <span class="vr-info-label">Business Address</span>
+            <span class="vr-info-value">{{ val('businessAddress') }}</span>
+          </div>
+          <div class="vr-info-row">
+            <span class="vr-info-label">Tax ID / GST</span>
+            <span class="vr-info-value">{{ val('taxId') }}</span>
+          </div>
+          <div class="vr-info-row">
+            <span class="vr-info-label">Description</span>
+            <span class="vr-info-value">{{ val('companyDescription') }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UPLOADED DOCUMENTS -->
+    <div class="vr-card">
+      <div class="vr-card-top">
+        <span class="vr-section-label">UPLOADED DOCUMENTS</span>
+      </div>
+      <div class="vr-card-body">
+        <h3 class="vr-card-title">Document readiness</h3>
+        <p class="vr-card-desc">Files that will be sent to the compliance queue.</p>
+        <div class="vr-divider"></div>
+
+        @if (documents.length === 0) {
+          <p class="vr-no-docs">No documents uploaded yet.</p>
+        } @else {
+          <div class="vr-doc-list">
+            @for (doc of documents; track doc.label) {
+              <div class="vr-doc-item">
+                <div class="vr-doc-check">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="#16a34a" stroke-width="1.6"/>
+                    <path d="M8 12l3 3 5-5" stroke="#16a34a" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="vr-doc-info">
+                  <span class="vr-doc-name">{{ doc.label }}</span>
+                  <span class="vr-doc-meta">{{ doc.fileName }} · {{ doc.fileSize }}</span>
+                </div>
+                <span class="vr-ready-badge">Ready</span>
+              </div>
+            }
+          </div>
+        }
+
+      </div>
+    </div>
+
+  </div>
+
+</div>

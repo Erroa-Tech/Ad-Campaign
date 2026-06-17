@@ -1,0 +1,109 @@
+<div class="bv-container">
+
+  <!-- ── Documents Card ────────────────────────────────── -->
+  <div class="bv-card">
+
+    <div class="bv-card-top">
+      <span class="bv-section-label">REQUIRED DOCUMENTS</span>
+    </div>
+
+    <div class="bv-card-body">
+      <div class="bv-card-info">
+        <h3 class="bv-card-title">Business verification documents</h3>
+        <p class="bv-card-desc">
+          Upload documents that match the advertiser name, address, and tax information entered in Step 1.
+        </p>
+      </div>
+
+      <!-- 2×2 Document Grid -->
+      <div class="bv-docs-grid">
+
+        @for (doc of documents; track doc.id) {
+          <div class="bv-doc">
+
+            <!-- Doc header: name + badge -->
+            <div class="bv-doc-header">
+              <span class="bv-doc-label">
+                {{ doc.label }}
+                @if (doc.required) { <span class="bv-star">*</span> }
+              </span>
+              <span class="bv-badge" [class.bv-badge--required]="doc.required" [class.bv-badge--optional]="!doc.required">
+                {{ doc.required ? 'Required' : 'Optional' }}
+              </span>
+            </div>
+
+            <!-- Description -->
+            <p class="bv-doc-desc">{{ doc.description }}</p>
+
+            <!-- Drop zone -->
+            <div
+              class="bv-dropzone"
+              [class.bv-dropzone--active]="doc.isDragOver"
+              [class.bv-dropzone--filled]="!!doc.fileName"
+              (dragover)="onDragOver($event, doc.id)"
+              (dragleave)="onDragLeave(doc.id)"
+              (drop)="onDrop($event, doc.id)"
+              (click)="!doc.fileName && triggerInput(doc.id)">
+
+              @if (doc.fileName) {
+                <!-- Filled state -->
+                <svg class="bv-file-icon" width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="bv-file-name">{{ doc.fileName }}</span>
+                <button
+                  type="button"
+                  class="bv-clear-btn"
+                  (click)="clearFile(doc.id, $event)">
+                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                    <path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                  </svg>
+                </button>
+              } @else {
+                <!-- Empty state -->
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"
+                    stroke="#94a3b8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="bv-drop-text">
+                  Drop file here or
+                  <button type="button" class="bv-browse-btn" (click)="$event.stopPropagation(); triggerInput(doc.id)">browse</button>
+                </span>
+              }
+
+            </div>
+
+            <!-- Hidden file input -->
+            <input
+              type="file"
+              [id]="'bv-file-' + doc.id"
+              class="bv-file-hidden"
+              accept=".pdf,.png,.jpg,.jpeg"
+              (change)="onFileSelected($event, doc.id)" />
+
+          </div>
+        }
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Quality Info Alert ─────────────────────────────── -->
+  <div class="bv-alert">
+    <div class="bv-alert-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="10" stroke="#f97316" stroke-width="1.8"/>
+        <path d="M12 8v4M12 16h.01" stroke="#f97316" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="bv-alert-body">
+      <p class="bv-alert-title">Document quality requirements</p>
+      <p class="bv-alert-text">
+        Upload clear, uncropped PDF, PNG, or JPG files. Names and registration numbers must match your advertiser information to avoid rejection
+      </p>
+    </div>
+  </div>
+
+</div>

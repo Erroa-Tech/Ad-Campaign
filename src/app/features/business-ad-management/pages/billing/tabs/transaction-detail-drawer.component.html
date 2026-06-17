@@ -1,0 +1,169 @@
+<!-- Backdrop -->
+<div class="tdd-backdrop" (click)="closed.emit()"></div>
+
+<!-- Drawer panel -->
+<div class="tdd-panel" role="dialog" aria-modal="true">
+
+  <!-- ── Header ─────────────────────────────────────────── -->
+  <div class="tdd-header">
+    <div class="tdd-header-left">
+      <div class="tdd-type-icon" [class]="typeClass()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+          <path d="M7 7l10 10M17 7v10H7" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <p class="tdd-txn-id">{{ transaction.txnId }}</p>
+        <h2 class="tdd-txn-title">{{ transaction.type }}</h2>
+      </div>
+    </div>
+    <button class="tdd-close-btn" type="button" (click)="closed.emit()" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Badges row -->
+  <div class="tdd-badges-row">
+    <div class="tdd-badges">
+      <span class="tdd-badge" [class]="statusClass()">
+        <span class="tdd-badge-dot"></span>
+        {{ transaction.status }}
+      </span>
+      <span class="tdd-badge" [class]="typeClass()">
+        <span class="tdd-badge-dot"></span>
+        {{ transaction.type }}
+      </span>
+    </div>
+    <span class="tdd-date">{{ formattedDate }}</span>
+  </div>
+
+  <!-- ── Scrollable body ──────────────────────────────────── -->
+  <div class="tdd-body">
+
+    <!-- FINANCIAL BREAKDOWN -->
+    <div class="tdd-section">
+      <p class="tdd-section-label">FINANCIAL BREAKDOWN</p>
+      <div class="tdd-section-body">
+        <div class="tdd-row">
+          <span class="tdd-row-key">Transaction Amount</span>
+          <span class="tdd-row-val tdd-row-val--red">{{ formatAmount(transaction.amount) }}</span>
+        </div>
+        @if (transaction.tax !== null) {
+          <div class="tdd-row">
+            <span class="tdd-row-key">GST (18%)</span>
+            <span class="tdd-row-val">{{ formatUsd(transaction.tax!) }}</span>
+          </div>
+        }
+        <div class="tdd-divider"></div>
+        <div class="tdd-row tdd-row--total">
+          <span class="tdd-row-key">Total</span>
+          <span class="tdd-row-val">{{ formatUsd(total) }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CAMPAIGN INFORMATION (only for campaign-based types) -->
+    @if (transaction.campaign) {
+      <div class="tdd-section">
+        <p class="tdd-section-label">CAMPAIGN INFORMATION</p>
+        <div class="tdd-section-body">
+          <div class="tdd-row">
+            <span class="tdd-row-key">Campaign</span>
+            <span class="tdd-row-val">{{ transaction.campaign }}</span>
+          </div>
+          @if (transaction.campaignId) {
+            <div class="tdd-row">
+              <span class="tdd-row-key">Campaign ID</span>
+              <span class="tdd-row-val">{{ transaction.campaignId }}</span>
+            </div>
+          }
+          @if (transaction.description) {
+            <div class="tdd-row">
+              <span class="tdd-row-key">Description</span>
+              <span class="tdd-row-val">{{ transaction.description }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- PAYMENT INFORMATION -->
+    <div class="tdd-section">
+      <p class="tdd-section-label">PAYMENT INFORMATION</p>
+      <div class="tdd-section-body">
+        <div class="tdd-row">
+          <span class="tdd-row-key">Payment Method</span>
+          <span class="tdd-row-val">{{ transaction.paymentMethod }}</span>
+        </div>
+        @if (transaction.reference) {
+          <div class="tdd-row">
+            <span class="tdd-row-key">Reference</span>
+            <span class="tdd-row-val tdd-row-val--mono">{{ transaction.reference }}</span>
+          </div>
+        }
+        @if (transaction.invoice) {
+          <div class="tdd-row">
+            <span class="tdd-row-key">Invoice</span>
+            <span class="tdd-row-val">{{ transaction.invoice }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="tdd-section tdd-section--last">
+      <p class="tdd-section-label">TIMELINE</p>
+      <div class="tdd-timeline">
+        @for (event of timeline; track event.label; let last = $last) {
+          <div class="tdd-timeline-item">
+            <div class="tdd-timeline-track">
+              <div class="tdd-timeline-dot">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" fill="#16a34a"/>
+                  <path d="M8 12l3 3 5-5" stroke="white" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              @if (!last) {
+                <div class="tdd-timeline-line"></div>
+              }
+            </div>
+            <div class="tdd-timeline-content">
+              <p class="tdd-event-label">{{ event.label }}</p>
+              <p class="tdd-event-time">{{ event.datetime }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+  </div><!-- /tdd-body -->
+
+  <!-- ── Footer ─────────────────────────────────────────── -->
+  <div class="tdd-footer">
+    <button class="tdd-footer-btn tdd-footer-btn--outline" type="button">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"
+          stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Receipt
+    </button>
+    <button class="tdd-footer-btn tdd-footer-btn--outline" type="button">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"
+          stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <polyline points="14 2 14 8 20 8" stroke="currentColor" stroke-width="1.8"
+          stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Invoice
+    </button>
+    <button class="tdd-footer-btn tdd-footer-btn--primary" type="button" (click)="closed.emit()">
+      Close
+    </button>
+  </div>
+
+</div>

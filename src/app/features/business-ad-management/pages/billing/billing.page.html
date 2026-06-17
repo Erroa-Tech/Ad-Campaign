@@ -1,0 +1,251 @@
+<div class="fb-page">
+
+  <!-- ── Page header ──────────────────────────────────────── -->
+  <div class="fb-header">
+    <h1 class="fb-title">Finance &amp; Billing</h1>
+    <p class="fb-subtitle">Manage your wallet, transactions, invoices, and payment settings.</p>
+  </div>
+
+  <!-- ── Tab bar ──────────────────────────────────────────── -->
+  <div class="fb-tabs" role="tablist">
+    <button class="fb-tab" [class.fb-tab--active]="activeTab === 'wallet'"
+      (click)="setTab('wallet')" role="tab">Wallet</button>
+    <button class="fb-tab" [class.fb-tab--active]="activeTab === 'transactions'"
+      (click)="setTab('transactions')" role="tab">Transactions</button>
+    <button class="fb-tab" [class.fb-tab--active]="activeTab === 'invoices'"
+      (click)="setTab('invoices')" role="tab">Invoices</button>
+    <button class="fb-tab" [class.fb-tab--active]="activeTab === 'payment-methods'"
+      (click)="setTab('payment-methods')" role="tab">Payment Methods</button>
+    <button class="fb-tab" [class.fb-tab--active]="activeTab === 'billing-profile'"
+      (click)="setTab('billing-profile')" role="tab">Billing Profile</button>
+  </div>
+
+  <div class="fb-tab-divider"></div>
+
+  <!-- ══ WALLET TAB ══════════════════════════════════════════ -->
+  @if (activeTab === 'wallet') {
+    <div class="fb-wallet-layout">
+
+      <!-- ── LEFT column ──────────────────────────────────── -->
+      <div class="fb-left">
+
+        <!-- Balance card -->
+        <div class="fb-balance-card">
+          <div class="fb-balance-left">
+            <p class="fb-balance-label">AVAILABLE BALANCE</p>
+            <p class="fb-balance-amount">{{ formatBalance(availableBalance) }}</p>
+            <p class="fb-balance-meta">Last updated: {{ lastUpdated }}</p>
+          </div>
+          <div class="fb-balance-actions">
+            <button class="fb-btn fb-btn--outline" type="button">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Withdraw
+            </button>
+            <button class="fb-btn fb-btn--primary" type="button">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Add Funds
+            </button>
+          </div>
+        </div>
+
+        <!-- Stat tiles -->
+        <div class="fb-stats">
+          @for (stat of stats; track stat.label) {
+            <div class="fb-stat-card">
+              <div class="fb-stat-top">
+                <div class="fb-stat-icon" [class]="'fb-stat-icon--' + stat.iconType">
+                  @if (stat.iconType === 'spend') {
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                      <path d="M7 7l10 10M17 7v10H7" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  } @else if (stat.iconType === 'recharge') {
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                      <path d="M17 17l-10-10M7 17V7h10" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  } @else if (stat.iconType === 'pending') {
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8"/>
+                      <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.8"
+                        stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  } @else {
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                      <line x1="12" y1="1" x2="12" y2="23" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round"/>
+                      <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  }
+                </div>
+                <span class="fb-stat-label">{{ stat.label }}</span>
+              </div>
+              <p class="fb-stat-value">{{ stat.value }}</p>
+            </div>
+          }
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="fb-activity-card">
+          <div class="fb-activity-header">
+            <span class="fb-activity-title">Recent Activity</span>
+            <button class="fb-view-all" type="button">View All →</button>
+          </div>
+
+          <div class="fb-activity-list">
+            @for (row of recentActivity; track row.id) {
+              <div class="fb-activity-row">
+
+                <div class="fb-txn-icon" [class]="'fb-txn-icon--' + row.iconType">
+                  @if (row.iconType === 'spend') {
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                      <path d="M7 7l10 10M17 7v10H7" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  } @else if (row.iconType === 'recharge') {
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                      <path d="M17 17l-10-10M7 17V7h10" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  } @else {
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/>
+                      <path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="1.8"
+                        stroke-linecap="round"/>
+                    </svg>
+                  }
+                </div>
+
+                <div class="fb-txn-info">
+                  <span class="fb-txn-name">{{ row.name }}</span>
+                  <span class="fb-txn-meta">{{ row.meta }} · {{ row.txnId }}</span>
+                </div>
+
+                <div class="fb-txn-right">
+                  <span class="fb-txn-amount"
+                    [class.fb-txn-amount--neg]="row.amount < 0"
+                    [class.fb-txn-amount--pos]="row.amount > 0">
+                    {{ formatAmount(row.amount) }}
+                  </span>
+                  <span class="fb-status" [class]="statusClass(row.status)">
+                    <span class="fb-status-dot"></span>
+                    {{ row.status }}
+                  </span>
+                </div>
+
+              </div>
+            }
+          </div>
+        </div>
+
+      </div><!-- /fb-left -->
+
+      <!-- ── RIGHT column ──────────────────────────────────── -->
+      <aside class="fb-right">
+
+        <!-- Balance Running Low -->
+        <div class="fb-warning-card">
+          <div class="fb-warning-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="#d97706" stroke-width="1.8"/>
+              <path d="M12 6v6l4 2" stroke="#d97706" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <p class="fb-warning-title">Balance Running Low</p>
+            <p class="fb-warning-desc">
+              Your balance will be insufficient within 2 days based on current spend rate ($480/day).
+            </p>
+          </div>
+        </div>
+
+        <!-- Auto Recharge -->
+        <div class="fb-panel">
+          <div class="fb-panel-header">
+            <span class="fb-panel-title">Auto Recharge</span>
+            <button class="fb-toggle" [class.fb-toggle--on]="autoRechargeEnabled"
+              type="button" (click)="toggleAutoRecharge()" aria-label="Toggle auto recharge">
+              <span class="fb-toggle-knob"></span>
+            </button>
+          </div>
+          <div class="fb-panel-rows">
+            <div class="fb-panel-row">
+              <span class="fb-panel-key">Trigger Threshold</span>
+              <span class="fb-panel-val">{{ autoRechargeSettings.triggerThreshold }}</span>
+            </div>
+            <div class="fb-panel-row">
+              <span class="fb-panel-key">Recharge Amount</span>
+              <span class="fb-panel-val">{{ autoRechargeSettings.rechargeAmount }}</span>
+            </div>
+            <div class="fb-panel-row">
+              <span class="fb-panel-key">Payment Method</span>
+              <span class="fb-panel-val">{{ autoRechargeSettings.paymentMethod }}</span>
+            </div>
+            <div class="fb-panel-row">
+              <span class="fb-panel-key">Monthly Limit</span>
+              <span class="fb-panel-val">{{ autoRechargeSettings.monthlyLimit }}</span>
+            </div>
+          </div>
+          <button class="fb-configure-btn" type="button">Configure Settings</button>
+        </div>
+
+        <!-- Monthly Spend Summary -->
+        <div class="fb-panel">
+          <p class="fb-panel-title">Monthly Spend Summary</p>
+          <div class="fb-panel-rows fb-panel-rows--gap">
+            <div class="fb-panel-row">
+              <span class="fb-panel-key">Budget Allocated</span>
+              <span class="fb-panel-val">${{ budgetAllocated.toLocaleString() }}</span>
+            </div>
+          </div>
+          <div class="fb-spend-block">
+            <div class="fb-panel-row">
+              <span class="fb-panel-key">Spent to Date</span>
+              <span class="fb-panel-val fb-panel-val--orange">${{ spentToDate.toLocaleString() }}</span>
+            </div>
+            <div class="fb-progress-track">
+              <div class="fb-progress-fill" [style.width.%]="spentPercent"></div>
+            </div>
+          </div>
+          <div class="fb-panel-rows">
+            <div class="fb-panel-row">
+              <span class="fb-panel-key">Remaining</span>
+              <span class="fb-panel-val">${{ remaining.toLocaleString() }}</span>
+            </div>
+          </div>
+        </div>
+
+      </aside><!-- /fb-right -->
+
+    </div>
+  }
+
+  <!-- ══ TRANSACTIONS TAB ════════════════════════════════════ -->
+  @if (activeTab === 'transactions') {
+    <app-billing-transactions />
+  }
+
+  <!-- ══ INVOICES TAB ═════════════════════════════════════════ -->
+  @if (activeTab === 'invoices') {
+    <app-billing-invoices />
+  }
+
+  <!-- ══ PAYMENT METHODS TAB ════════════════════════════════ -->
+  @if (activeTab === 'payment-methods') {
+    <app-billing-payment-methods />
+  }
+
+  <!-- ══ BILLING PROFILE TAB ════════════════════════════════ -->
+  @if (activeTab === 'billing-profile') {
+    <app-billing-profile />
+  }
+
+</div>

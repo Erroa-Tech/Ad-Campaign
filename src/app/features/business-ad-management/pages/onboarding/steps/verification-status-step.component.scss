@@ -1,0 +1,352 @@
+/* ── Layout ────────────────────────────────────────────── */
+.vs-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 20px;
+  align-items: start;
+}
+
+/* ── Tab Bar ───────────────────────────────────────────── */
+.vs-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8pc;
+  margin-bottom: 16px;
+}
+
+.vs-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+
+  &:hover:not(.vs-tab--active-review):not(.vs-tab--active-approved):not(.vs-tab--active-rejected) {
+    border-color: #cbd5e1;
+    background: #f8fafc;
+  }
+
+  &--active-review {
+    border-color: #f97316;
+    color: #f97316;
+    background: rgba(249, 115, 22, 0.04);
+  }
+
+  &--active-approved {
+    border-color: #16a34a;
+    color: #16a34a;
+    background: rgba(22, 163, 74, 0.04);
+  }
+
+  &--active-rejected {
+    border-color: #dc2626;
+    color: #dc2626;
+    background: rgba(220, 38, 38, 0.04);
+  }
+}
+
+/* ── Status card ───────────────────────────────────────── */
+.vs-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.vs-status-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.vs-status-icon-wrap {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  &--orange {
+    border: 1.5px solid #fed7aa;
+    background: #fff7ed;
+  }
+
+  &--green {
+    border: 1.5px solid #bbf7d0;
+    background: #f0fdf4;
+  }
+
+  &--red {
+    border: 1.5px solid #fecaca;
+    background: #fef2f2;
+  }
+}
+
+.vs-status-title {
+  margin: 0 0 4px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.vs-status-sub {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.vs-divider {
+  height: 1px;
+  background: #f1f5f9;
+}
+
+.vs-status-desc {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #64748b;
+  line-height: 1.6;
+
+  strong {
+    color: #0f172a;
+    font-weight: 600;
+  }
+}
+
+/* ── Checklist (Under Review) ──────────────────────────── */
+.vs-checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.vs-checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.vs-checklist-label {
+  font-size: 0.84rem;
+  font-weight: 500;
+
+  &--done    { color: #0f172a; }
+  &--pending { color: #94a3b8; }
+}
+
+/* ── Alert cards (shared, color-variant) ───────────────── */
+.vs-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 8px;
+
+  &--green {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+  }
+
+  &--red {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+  }
+
+  svg { flex-shrink: 0; margin-top: 1px; }
+}
+
+.vs-alert-title {
+  margin: 0 0 3px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #16a34a;
+
+  &--red { color: #f97316; }
+}
+
+.vs-alert-desc {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #16a34a;
+  line-height: 1.5;
+
+  &--red { color: #dc2626; }
+}
+
+/* ── Required changes card (Rejected) ─────────────────── */
+.vs-changes-card {
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.vs-changes-title {
+  margin: 0 0 10px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.vs-changes-list {
+  margin: 0;
+  padding: 0 0 0 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  li {
+    font-size: 0.81rem;
+    color: #475569;
+    line-height: 1.5;
+  }
+}
+
+/* ── CTA button ────────────────────────────────────────── */
+.vs-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+
+  &--orange {
+    background: #f97316;
+    color: #ffffff;
+
+    &:hover { opacity: 0.9; }
+  }
+}
+
+/* ── Right sidebar (advertiser card) ───────────────────── */
+.vs-sidebar {
+  position: sticky;
+  top: 0;
+}
+
+.vs-adv-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.vs-adv-label {
+  margin: 0;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #f97316;
+}
+
+.vs-adv-name {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.vs-adv-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.vs-adv-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f8fafc;
+
+  &:last-child { border-bottom: none; }
+}
+
+.vs-adv-key {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.vs-adv-val {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #0f172a;
+  text-align: right;
+  word-break: break-all;
+
+  &--mono {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+  }
+}
+
+/* ── Toast ─────────────────────────────────────────────── */
+.vs-toast {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+  min-width: 260px;
+  max-width: 320px;
+  z-index: 1000;
+  animation: vs-toast-in 0.3s ease both;
+}
+
+.vs-toast-icon { flex-shrink: 0; }
+
+.vs-toast-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.vs-toast-title {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.vs-toast-sub {
+  margin: 0;
+  font-size: 0.76rem;
+  color: #94a3b8;
+}
+
+@keyframes vs-toast-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}

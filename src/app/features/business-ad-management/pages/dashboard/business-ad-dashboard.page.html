@@ -1,0 +1,82 @@
+<div class="bad-dashboard">
+
+  <!-- ── Page Header ────────────────────────────────────── -->
+  <div class="bad-header">
+    <div class="bad-header-left">
+      <h1 class="bad-title">Dashboard</h1>
+      <p class="bad-date">{{ today }}</p>
+    </div>
+    <button class="bad-new-btn" routerLink="/business-ad-management/create-campaign">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      New Campaign
+    </button>
+  </div>
+
+  <!-- ── Stats Row ──────────────────────────────────────── -->
+  <div class="bad-stats-grid">
+    @for (stat of stats; track stat.label) {
+      <app-bam-stat-card [stat]="stat" />
+    }
+  </div>
+
+  <!-- ── Body: Campaign Table + Action Panel ────────────── -->
+  <div class="bad-body-grid">
+
+    <!-- Campaign Overview Card -->
+    <div class="bad-overview-card">
+      <div class="bad-card-header">
+        <div>
+          <h2 class="bad-card-title">Campaign Overview</h2>
+          <p class="bad-card-sub">All campaigns across your account</p>
+        </div>
+        <a class="bad-view-all" href="#">
+          View All
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M2.5 9.5L9.5 2.5M9.5 2.5H5M9.5 2.5v4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="bad-table-wrap">
+        <table class="bad-table">
+          <thead>
+            <tr>
+              <th>CAMPAIGN</th>
+              <th>PLACEMENT</th>
+              <th>STATUS</th>
+              <th>REACH</th>
+              <th>CLICKS</th>
+              <th>SPEND</th>
+              <th>UPDATED</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of campaigns; track row.id) {
+              <tr>
+                <td class="bad-td-name">{{ row.name }}</td>
+                <td class="bad-td-placement">{{ row.placement }}</td>
+                <td>
+                  <span [class]="'bad-status-badge ' + statusClass(row.status)">
+                    <span class="bad-status-dot"></span>
+                    {{ row.status }}
+                  </span>
+                </td>
+                <td class="bad-td-num">{{ fmtNumber(row.reach) }}</td>
+                <td class="bad-td-num">{{ fmtNumber(row.clicks) }}</td>
+                <td class="bad-td-num">{{ fmtSpend(row.spend) }}</td>
+                <td class="bad-td-date">{{ row.updatedDate }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Action Required Panel -->
+    <app-bam-action-required [items]="actionItems" />
+
+  </div>
+
+</div>

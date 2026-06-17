@@ -1,0 +1,129 @@
+.bds-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background: #ffffff;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── 2-column grid ────────────────────────────────── */
+.bds-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 24px;
+}
+
+/* ── Field ────────────────────────────────────────── */
+.bds-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bds-label {
+  font-size: 0.71rem;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: 0.08em;
+}
+
+.bds-req {
+  color: #f97316;
+  margin-left: 2px;
+}
+
+/* ── Input ────────────────────────────────────────── */
+.bds-input {
+  height: 42px;
+  padding: 0 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+  background: #ffffff;
+  font-size: 0.88rem;
+  color: #0f172a;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  box-sizing: border-box;
+  width: 100%;
+
+  &[type='number'] {
+    -moz-appearance: textfield;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  }
+
+  &::placeholder { color: #94a3b8; }
+
+  &:focus {
+    border-color: #f97316;
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+  }
+
+  &.bds-input--error {
+    border-color: #ef4444;
+    &:focus { box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1); }
+  }
+
+  &.bds-input--date {
+    color: #475569;
+    cursor: pointer;
+
+    &::-webkit-calendar-picker-indicator {
+      opacity: 0.5;
+      cursor: pointer;
+      &:hover { opacity: 0.8; }
+    }
+  }
+}
+
+/* ── Hint & error ────────────────────────────────── */
+.bds-hint {
+  margin: 0;
+  font-size: 0.76rem;
+  color: #94a3b8;
+}
+
+.bds-error-msg {
+  font-size: 0.74rem;
+  color: #ef4444;
+}
+
+/* ── Summary tiles ───────────────────────────────── */
+.bds-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 20px;
+}
+
+.bds-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 16px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.bds-stat-value {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.bds-stat-label {
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: #94a3b8;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  text-align: center;
+}

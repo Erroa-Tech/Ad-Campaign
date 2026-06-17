@@ -1,0 +1,101 @@
+<div class="bds-card" [formGroup]="form">
+
+  <div class="bds-grid">
+
+    <!-- DAILY BUDGET (USD) -->
+    <div class="bds-field">
+      <label class="bds-label" for="dailyBudget">
+        DAILY BUDGET (USD)
+        <span class="bds-req">*</span>
+      </label>
+      <input
+        id="dailyBudget"
+        class="bds-input"
+        [class.bds-input--error]="isInvalid('dailyBudget')"
+        type="number"
+        min="1"
+        step="1"
+        formControlName="dailyBudget"
+        placeholder="50" />
+      @if (isInvalid('dailyBudget')) {
+        <span class="bds-error-msg">Daily budget is required.</span>
+      }
+    </div>
+
+    <!-- TOTAL BUDGET CAP (USD) -->
+    <div class="bds-field">
+      <label class="bds-label" for="totalBudgetCap">TOTAL BUDGET CAP (USD)</label>
+      <input
+        id="totalBudgetCap"
+        class="bds-input"
+        type="number"
+        min="1"
+        step="1"
+        formControlName="totalBudgetCap"
+        placeholder="Optional" />
+      <p class="bds-hint">Campaign stops when cap is hit.</p>
+    </div>
+
+    <!-- START DATE -->
+    <div class="bds-field">
+      <label class="bds-label" for="startDate">
+        START DATE
+        <span class="bds-req">*</span>
+      </label>
+      <input
+        id="startDate"
+        class="bds-input bds-input--date"
+        [class.bds-input--error]="isInvalid('startDate')"
+        type="date"
+        formControlName="startDate" />
+      @if (isInvalid('startDate')) {
+        <span class="bds-error-msg">Start date is required.</span>
+      }
+    </div>
+
+    <!-- END DATE -->
+    <div class="bds-field">
+      <label class="bds-label" for="endDate">
+        END DATE
+        <span class="bds-req">*</span>
+      </label>
+      <input
+        id="endDate"
+        class="bds-input bds-input--date"
+        [class.bds-input--error]="isInvalid('endDate')"
+        type="date"
+        formControlName="endDate" />
+      @if (isInvalid('endDate')) {
+        <span class="bds-error-msg">End date is required.</span>
+      }
+    </div>
+
+  </div>
+
+  <!-- ── Summary tiles ──────────────────────────── -->
+  @if (showSummary) {
+    <div class="bds-summary">
+
+      <div class="bds-stat">
+        <span class="bds-stat-value">
+          {{ durationDays !== null ? durationDays + ' days' : '—' }}
+        </span>
+        <span class="bds-stat-label">DURATION</span>
+      </div>
+
+      <div class="bds-stat">
+        <span class="bds-stat-value">
+          {{ estTotalSpend !== null ? fmtUsd(estTotalSpend) : '—' }}
+        </span>
+        <span class="bds-stat-label">EST. TOTAL SPEND</span>
+      </div>
+
+      <div class="bds-stat">
+        <span class="bds-stat-value">{{ fmtUsd(dailyBudgetValue!) }}</span>
+        <span class="bds-stat-label">DAILY BUDGET</span>
+      </div>
+
+    </div>
+  }
+
+</div>

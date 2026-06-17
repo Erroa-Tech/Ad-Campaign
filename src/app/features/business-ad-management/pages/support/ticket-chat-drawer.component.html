@@ -1,0 +1,95 @@
+<!-- Backdrop -->
+<div class="tcd-overlay" (click)="close()">
+
+  <!-- Slide-in panel -->
+  <div class="tcd-panel" (click)="$event.stopPropagation()">
+
+    <!-- ── Header ─────────────────────────────────── -->
+    <div class="tcd-header">
+      <div class="tcd-header-top">
+        <div class="tcd-badges">
+          <span class="tcd-ticket-id">{{ ticket.ticketId }}</span>
+          <span class="tcd-status-badge {{ statusClass(ticket.status) }}">
+            {{ ticket.status }}
+          </span>
+          <span class="tcd-priority-badge {{ priorityClass(ticket.priority) }}">
+            {{ ticket.priority }}
+          </span>
+        </div>
+        <button class="tcd-close-x" (click)="close()" type="button">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <h2 class="tcd-subject">{{ ticket.subject }}</h2>
+      <p class="tcd-meta">{{ ticket.category }} · Opened {{ ticket.openedDate }}</p>
+    </div>
+
+    <div class="tcd-divider"></div>
+
+    <!-- ── Scrollable Body ────────────────────────── -->
+    <div class="tcd-body">
+
+      <!-- Issue description card -->
+      @if (ticket.description) {
+        <div class="tcd-desc-card">
+          <span class="tcd-desc-label">ISSUE DESCRIPTION</span>
+          <p class="tcd-desc-text">{{ ticket.description }}</p>
+          @if (ticket.campaignRef) {
+            <span class="tcd-campaign-link">Related campaign: {{ ticket.campaignRef }}</span>
+          }
+        </div>
+      }
+
+      <!-- Messages -->
+      <div class="tcd-messages">
+        @for (msg of messages; track msg.id) {
+          <div class="tcd-msg-wrap" [class.tcd-msg-wrap--user]="msg.sender === 'user'">
+            <span class="tcd-msg-meta">
+              @if (msg.sender === 'user') {
+                You · {{ msg.timestamp }}
+              } @else {
+                Support · {{ msg.senderName }} · {{ msg.timestamp }}
+              }
+            </span>
+            <div class="tcd-bubble" [class.tcd-bubble--user]="msg.sender === 'user'">
+              {{ msg.text }}
+            </div>
+          </div>
+        }
+      </div>
+
+    </div>
+
+    <!-- ── Footer ────────────────────────────────── -->
+    <div class="tcd-footer">
+      <textarea
+        class="tcd-reply-input"
+        placeholder="Write a reply..."
+        [(ngModel)]="replyText"
+        rows="3">
+      </textarea>
+      <div class="tcd-footer-actions">
+        <button class="tcd-attach-btn" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+            <path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Attach
+        </button>
+        <button class="tcd-send-btn" type="button" (click)="sendReply()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+            <path d="M22 2L11 13" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M22 2L15 22 11 13 2 9l20-7z" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Send Reply
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

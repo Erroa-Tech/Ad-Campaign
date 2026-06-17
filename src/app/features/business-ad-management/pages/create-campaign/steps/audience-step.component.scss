@@ -1,0 +1,560 @@
+.as-card {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background: #ffffff;
+  padding: 24px;
+}
+
+/* ── Section ─────────────────────────────────────────── */
+.as-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.as-section-label {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: 0.08em;
+}
+
+/* ── Toggle Buttons (Gender & Age) ──────────────────── */
+.as-toggle-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.as-toggle {
+  padding: 7px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #475569;
+  font-size: 0.83rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  white-space: nowrap;
+
+  &:hover:not(.as-toggle--on) {
+    border-color: #cbd5e1;
+    background: #f8fafc;
+  }
+
+  &.as-toggle--on {
+    border-color: #f97316;
+    color: #f97316;
+    background: #fff7ed;
+    font-weight: 600;
+  }
+}
+
+/* ── Age Slider ──────────────────────────────────── */
+.as-section-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.as-age-range-val {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #f97316;
+}
+
+.as-age-slider-wrap {
+  position: relative;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.as-age-thumb-tip {
+  position: absolute;
+  top: -30px;
+  transform: translateX(-50%);
+  background: #f97316;
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 4px 7px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 2;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid transparent;
+    border-top-color: #f97316;
+  }
+}
+
+.as-age-track-bg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: #e2e8f0;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.as-age-track-fill {
+  position: absolute;
+  height: 4px;
+  background: #f97316;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.as-age-range {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  pointer-events: none;
+  outline: none;
+  border: none;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #f97316;
+    border: none;
+    box-shadow: 0 1px 6px rgba(249, 115, 22, 0.35);
+    cursor: grab;
+    pointer-events: all;
+    transition: box-shadow 0.15s;
+
+    &:active { cursor: grabbing; }
+  }
+
+  &::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #f97316;
+    border: none;
+    box-shadow: 0 1px 6px rgba(249, 115, 22, 0.35);
+    cursor: grab;
+    pointer-events: all;
+  }
+
+  &:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 5px rgba(249, 115, 22, 0.2);
+  }
+}
+
+.as-age-bounds {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.73rem;
+  font-weight: 500;
+  color: #94a3b8;
+}
+
+/* ── Location Block ──────────────────────────────────── */
+.as-location-block {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 20px;
+}
+
+.as-location-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.as-location-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #52525B;
+  letter-spacing: 0.08em;
+}
+
+/* ── Sub-section (Countries, States, Cities) ─────────── */
+.as-sub-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+}
+
+.as-sub-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.as-sub-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: 0.07em;
+  flex: 1;
+}
+
+.as-clear-btn {
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #f97316;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  &:hover { text-decoration: underline; }
+}
+
+/* ── Select Field ────────────────────────────────────── */
+.as-select-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+  background: #ffffff;
+  cursor: pointer;
+  transition: border-color 0.15s;
+
+  &:hover:not(.as-select-field--disabled) { border-color: #cbd5e1; }
+
+  &.as-select-field--disabled {
+    background: #f8fafc;
+    cursor: default;
+    .as-select-text { color: #94a3b8; }
+  }
+}
+
+.as-select-text {
+  font-size: 0.84rem;
+  color: #475569;
+}
+
+.as-select-badge {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #f97316;
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+/* ── Dropdown ────────────────────────────────────────── */
+.as-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.1);
+  overflow: hidden;
+}
+
+.as-dropdown-search {
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-bottom: 1px solid #f1f5f9;
+  outline: none;
+  font-size: 0.83rem;
+  color: #0f172a;
+  background: #f8fafc;
+  box-sizing: border-box;
+
+  &::placeholder { color: #94a3b8; }
+}
+
+.as-dropdown-list {
+  max-height: 180px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar { width: 4px; }
+  &::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 4px; }
+}
+
+.as-dropdown-item {
+  padding: 9px 14px;
+  font-size: 0.84rem;
+  color: #334155;
+  cursor: pointer;
+  transition: background 0.1s;
+
+  &:hover { background: #fff7ed; color: #f97316; }
+}
+
+.as-dropdown-empty {
+  padding: 12px 14px;
+  font-size: 0.82rem;
+  color: #94a3b8;
+  text-align: center;
+}
+
+/* ── Tags ────────────────────────────────────────────── */
+.as-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.as-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #334155;
+}
+
+.as-tag-x {
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 0.9rem;
+  color: #94a3b8;
+  cursor: pointer;
+  line-height: 1;
+
+  &:hover { color: #ef4444; }
+}
+
+/* ── City text input ─────────────────────────────────── */
+.as-text-input {
+  width: 100%;
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+  outline: none;
+  font-size: 0.84rem;
+  color: #0f172a;
+  background: #ffffff;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+
+  &::placeholder { color: #94a3b8; }
+  &:focus { border-color: #f97316; }
+}
+
+/* ── Pin / Postal Code (multi-entry) ─────────────────── */
+.as-pin-input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.as-pin-field-wrap {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 38px;
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+  background: #ffffff;
+  transition: border-color 0.15s;
+
+  &:focus-within            { border-color: #f97316; }
+  &.as-pin-field--error     { border-color: #ef4444; &:focus-within { border-color: #ef4444; } }
+  &.as-pin-field--valid     { border-color: #22c55e; }
+}
+
+.as-pin-field {
+  flex: 1;
+  height: 100%;
+  padding: 0 10px;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: #0f172a;
+  letter-spacing: 0.06em;
+  border-radius: 9px;
+
+  &::placeholder { color: #94a3b8; font-weight: 400; letter-spacing: 0; }
+}
+
+.as-pin-iso-badge {
+  flex-shrink: 0;
+  margin-right: 8px;
+  padding: 2px 7px;
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  border-radius: 5px;
+
+  &--checking {
+    background: #f1f5f9;
+    color: #94a3b8;
+    letter-spacing: 0.12em;
+  }
+}
+
+.as-pin-add-btn {
+  flex-shrink: 0;
+  height: 38px;
+  padding: 0 18px;
+  border: 1.5px solid #f97316;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #f97316;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+
+  &:hover:not(:disabled) { background: #f97316; color: #ffffff; }
+  &:disabled { border-color: #e2e8f0; color: #cbd5e1; cursor: default; }
+}
+
+.as-pin-error {
+  margin: 0;
+  font-size: 0.74rem;
+  color: #ef4444;
+  line-height: 1.4;
+}
+
+.as-pin-hint {
+  margin: 0;
+  font-size: 0.74rem;
+  color: #22c55e;
+
+  &--checking {
+    color: #94a3b8;
+    font-style: italic;
+  }
+}
+
+.as-pin-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.as-pin-code {
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+.as-pin-iso {
+  padding: 1px 5px;
+  background: #f0fdf4;
+  color: #15803d;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  border-radius: 4px;
+}
+
+/* ── Selected Targeting Box ─────────────────────────── */
+.as-targeting-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px;
+  background: #f8fafc;
+  border: 1px solid #e9edf5;
+  border-radius: 10px;
+}
+
+/* ── Reach Box ───────────────────────────────────────── */
+.as-reach-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 18px;
+  background: #f8fafc;
+  border: 1px solid #e9edf5;
+  border-radius: 10px;
+}
+
+/* Shared box styles */
+.as-box-label {
+  margin: 0;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #94a3b8;
+  letter-spacing: 0.1em;
+}
+
+.as-targeting-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.83rem;
+  color: #334155;
+}
+
+.as-reach-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.as-reach-update {
+  font-size: 0.72rem;
+  color: #94a3b8;
+}
+
+.as-reach-value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.as-reach-unit {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.as-reach-desc {
+  margin: 0;
+  font-size: 0.78rem;
+  color: #64748b;
+  line-height: 1.55;
+}

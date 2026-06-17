@@ -1,0 +1,52 @@
+<div class="ar-card">
+
+  <!-- Header -->
+  <div class="ar-header">
+    <div class="ar-title-row">
+      <h3 class="ar-title">Action Required</h3>
+      <span class="ar-badge">{{ items.length }}</span>
+    </div>
+    <p class="ar-sub">{{ items.length }} items need attention</p>
+  </div>
+
+  <!-- Items -->
+  <div class="ar-list">
+    @for (item of items; track item.id) {
+      <div class="ar-item">
+
+        <!-- Icon -->
+        <!-- <div class="ar-item-icon" [class]="'ar-icon-' + item.type"> -->
+          @switch (item.type) {
+            @case ('alert') {
+              <img src="assets/icons/flash_rejected_Icon.png" alt="Alert Icon" width="28" height="28"/>
+            }
+            @case ('billing') {
+             <img src="assets/icons/payment_Icon.png" alt="Alert Icon" width="28" height="28"/>
+            }
+            @case ('calendar') {
+         <img src="assets/icons/backToschool_Icon.png" alt="Calendar Icon" width="28" height="28"/>
+            }
+            @case ('pending') {
+             <img src="assets/icons/brandVideo_Icon.png" alt="Alert Icon" width="28" height="28"/>
+            }
+          }
+        <!-- </div> -->
+
+        <!-- Body -->
+        <div class="ar-item-body">
+          <div class="ar-item-top">
+            <span class="ar-item-title">{{ item.title }}</span>
+            <span class="ar-item-time">{{ item.timeAgo }}</span>
+          </div>
+          <p class="ar-item-desc">{{ item.description }}</p>
+          <a class="ar-item-action" href="#">
+            {{ item.actionLabel }}
+        <img src="assets/icons/forward_Icon.png" alt="Alert Icon" width="10" height="10"/>
+          </a>
+        </div>
+
+      </div>
+    }
+  </div>
+
+</div>

@@ -1,0 +1,289 @@
+<div class="ai-container" [formGroup]="form">
+
+  <!-- ── 01 · IDENTITY ────────────────────────────────── -->
+  <div class="ai-section">
+    <div class="ai-section-top">
+      <span class="ai-section-label">
+        <span class="ai-section-num">01</span>
+        <span class="ai-mid-dot">·</span>
+        IDENTITY
+      </span>
+    </div>
+    <div class="ai-section-body">
+      <div class="ai-section-info">
+        <h3 class="ai-section-title">Advertiser Identity</h3>
+        <p class="ai-section-desc">This legal and contact information is used for account verification, invoices, and ad policy review.</p>
+      </div>
+
+      <div class="ai-grid">
+
+        <!-- ADVERTISER NAME -->
+        <div class="ai-field">
+          <label class="ai-label" for="advertiserName">
+            ADVERTISER NAME <span class="ai-required">*</span>
+          </label>
+          <input id="advertiserName" type="text" class="ai-input"
+            [class.ai-input--error]="isInvalid('advertiserName')"
+            formControlName="advertiserName"
+            placeholder="Acme Retail Pvt Ltd"
+            autocomplete="organization" />
+          <span class="ai-helper">Legal advertiser or company name</span>
+          @if (isInvalid('advertiserName')) {
+            <span class="ai-error-msg">Advertiser name is required.</span>
+          }
+        </div>
+
+        <!-- BUSINESS TYPE -->
+        <div class="ai-field">
+          <label class="ai-label" for="businessType">
+            BUSINESS TYPE <span class="ai-required">*</span>
+          </label>
+          <input id="businessType" type="text" class="ai-input"
+            [class.ai-input--error]="isInvalid('businessType')"
+            formControlName="businessType"
+            autocomplete="off" />
+          @if (isInvalid('businessType')) {
+            <span class="ai-error-msg">Business type is required.</span>
+          }
+        </div>
+
+        <!-- INDUSTRY -->
+        <div class="ai-field">
+          <label class="ai-label" for="industry">
+            INDUSTRY <span class="ai-required">*</span>
+          </label>
+          <input id="industry" type="text" class="ai-input"
+            [class.ai-input--error]="isInvalid('industry')"
+            formControlName="industry"
+            autocomplete="off" />
+          @if (isInvalid('industry')) {
+            <span class="ai-error-msg">Industry is required.</span>
+          }
+        </div>
+
+        <!-- COMPANY WEBSITE -->
+        <div class="ai-field">
+          <label class="ai-label" for="companyWebsite">
+            COMPANY WEBSITE <span class="ai-required">*</span>
+          </label>
+          <input id="companyWebsite" type="url" class="ai-input"
+            [class.ai-input--error]="isInvalid('companyWebsite')"
+            formControlName="companyWebsite"
+            placeholder="https://company.com"
+            autocomplete="url" />
+          <span class="ai-helper">Landing domains are checked during campaign review</span>
+          @if (isInvalid('companyWebsite')) {
+            <span class="ai-error-msg">Company website is required.</span>
+          }
+        </div>
+
+        <!-- BUSINESS EMAIL -->
+        <div class="ai-field">
+          <label class="ai-label" for="businessEmail">
+            BUSINESS EMAIL <span class="ai-required">*</span>
+          </label>
+          <input id="businessEmail" type="email" class="ai-input"
+            [class.ai-input--error]="isInvalid('businessEmail')"
+            formControlName="businessEmail"
+            placeholder="ads@company.com"
+            autocomplete="email" />
+          @if (isInvalid('businessEmail')) {
+            <span class="ai-error-msg">Valid business email is required.</span>
+          }
+        </div>
+
+        <!-- PHONE NUMBER -->
+        <div class="ai-field">
+          <label class="ai-label" for="phoneNumber">
+            PHONE NUMBER <span class="ai-required">*</span>
+          </label>
+          <input id="phoneNumber" type="tel" class="ai-input"
+            [class.ai-input--error]="isInvalid('phoneNumber')"
+            formControlName="phoneNumber"
+            placeholder="+91 98765 43210"
+            autocomplete="tel" />
+          @if (isInvalid('phoneNumber')) {
+            <span class="ai-error-msg">Phone number is required.</span>
+          }
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 02 · COMPANY ──────────────────────────────────── -->
+  <div class="ai-section">
+    <div class="ai-section-top">
+      <span class="ai-section-label">
+        <span class="ai-section-num">02</span>
+        <span class="ai-mid-dot">·</span>
+        COMPANY
+      </span>
+    </div>
+    <div class="ai-section-body">
+      <div class="ai-section-info">
+        <h3 class="ai-section-title">Company details</h3>
+        <p class="ai-section-desc">Address and tax details help validate your advertiser account and keep finance records accurate.</p>
+      </div>
+
+      <div class="ai-grid">
+
+        <!-- COUNTRY -->
+        <div class="ai-field">
+          <label class="ai-label" for="country">
+            COUNTRY <span class="ai-required">*</span>
+          </label>
+          <input id="country" type="text" class="ai-input"
+            [class.ai-input--error]="isInvalid('country')"
+            formControlName="country"
+            autocomplete="country-name" />
+          @if (isInvalid('country')) {
+            <span class="ai-error-msg">Country is required.</span>
+          }
+        </div>
+
+        <!-- STATE / REGION -->
+        <div class="ai-field">
+          <label class="ai-label" for="stateRegion">
+            STATE / REGION <span class="ai-required">*</span>
+          </label>
+          <input id="stateRegion" type="text" class="ai-input"
+            [class.ai-input--error]="isInvalid('stateRegion')"
+            formControlName="stateRegion"
+            autocomplete="address-level1" />
+          @if (isInvalid('stateRegion')) {
+            <span class="ai-error-msg">State / Region is required.</span>
+          }
+        </div>
+
+        <!-- BUSINESS ADDRESS -->
+        <div class="ai-field ai-field--full">
+          <label class="ai-label" for="businessAddress">
+            BUSINESS ADDRESS <span class="ai-required">*</span>
+          </label>
+          <textarea id="businessAddress" class="ai-textarea"
+            [class.ai-textarea--error]="isInvalid('businessAddress')"
+            formControlName="businessAddress"
+            placeholder="Registered office address"
+            rows="3">
+          </textarea>
+          @if (isInvalid('businessAddress')) {
+            <span class="ai-error-msg">Business address is required.</span>
+          }
+        </div>
+
+        <!-- COMPANY DESCRIPTION -->
+        <div class="ai-field ai-field--full">
+          <label class="ai-label" for="companyDescription">
+            COMPANY DESCRIPTION <span class="ai-required">*</span>
+          </label>
+          <textarea id="companyDescription" class="ai-textarea"
+            [class.ai-textarea--error]="isInvalid('companyDescription')"
+            formControlName="companyDescription"
+            placeholder="Describe the company, products, and advertising purpose"
+            rows="5">
+          </textarea>
+          <span class="ai-helper">A short business description improves reviewer context</span>
+          @if (isInvalid('companyDescription')) {
+            <span class="ai-error-msg">Company description is required.</span>
+          }
+        </div>
+
+        <!-- TAX ID / GST NUMBER -->
+        <div class="ai-field">
+          <label class="ai-label" for="taxId">
+            TAX ID / GST NUMBER <span class="ai-required">*</span>
+          </label>
+          <input id="taxId" type="text" class="ai-input"
+            [class.ai-input--error]="isInvalid('taxId')"
+            formControlName="taxId"
+            placeholder="27ABCDE1234FIZ5"
+            autocomplete="off" />
+          <span class="ai-helper">GSTIN, VAT, EIN, or local tax registration number</span>
+          @if (isInvalid('taxId')) {
+            <span class="ai-error-msg">Tax ID is required.</span>
+          }
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 03 · BRANDING ────────────────────────────────── -->
+  <div class="ai-section">
+    <div class="ai-section-top">
+      <span class="ai-section-label">
+        <span class="ai-section-num">03</span>
+        <span class="ai-mid-dot">·</span>
+        BRANDING
+      </span>
+    </div>
+    <div class="ai-section-body">
+      <div class="ai-section-info">
+        <h3 class="ai-section-title">Branding information</h3>
+        <p class="ai-section-desc">Logo and brand context help reviewers understand how your ads will appear across StatusCall placements.</p>
+      </div>
+
+      <!-- Logo upload -->
+      <div class="ai-upload-row">
+
+        <!-- Preview -->
+        <div class="ai-logo-preview">
+          @if (logoPreviewUrl) {
+            <img [src]="logoPreviewUrl" alt="Logo preview" class="ai-logo-img" />
+            <button type="button" class="ai-logo-clear" (click)="clearLogo()">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                <path d="M1 1l8 8M9 1L1 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+          } @else {
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
+              <path d="M3 21h18M5 21V5a2 2 0 012-2h10a2 2 0 012 2v16M9 9h1M9 13h1M9 17h1M14 9h1M14 13h1M14 17h1"
+                stroke="#cbd5e1" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          }
+        </div>
+
+        <!-- Upload zone -->
+        <div class="ai-upload-zone-wrap">
+          <div class="ai-upload-header">
+            <span class="ai-upload-title">Logo Upload</span>
+            <span class="ai-optional-badge">Optional</span>
+          </div>
+          <p class="ai-upload-desc">Upload a square PNG, JPG, or SVG. This is used by ad reviewers and previews.</p>
+
+          <div
+            class="ai-dropzone"
+            [class.ai-dropzone--active]="isDragOver"
+            (dragover)="onDragOver($event)"
+            (dragleave)="onDragLeave()"
+            (drop)="onDrop($event)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"
+                stroke="#94a3b8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="ai-drop-text">
+              Drop file here or
+              <button type="button" class="ai-browse-btn" (click)="fileInput.click()">browse</button>
+            </span>
+          </div>
+
+          <input #fileInput type="file" accept=".png,.jpg,.jpeg,.svg"
+            class="ai-file-hidden" (change)="onFileSelected($event)" />
+
+          @if (selectedFileName) {
+            <span class="ai-file-name">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  stroke="#16a34a" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              {{ selectedFileName }}
+            </span>
+          }
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

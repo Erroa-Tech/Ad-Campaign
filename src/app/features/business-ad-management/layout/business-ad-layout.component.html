@@ -1,0 +1,81 @@
+<div class="bam-shell">
+
+  <!-- ── Sidebar ────────────────────────────────────────── -->
+  <nav class="bam-sidebar">
+
+    <!-- Brand -->
+    <div class="bam-brand">
+      <span class="bam-brand-icon">AR</span>
+      <div class="bam-brand-text">
+        <span class="bam-brand-name">AdManager</span>
+        <span class="bam-brand-sub">Business Platform</span>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="bam-nav">
+      <span class="bam-nav-label">NAVIGATION</span>
+
+      <a class="bam-nav-item" routerLink="dashboard" routerLinkActive="active">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <rect x="1" y="1" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="9" y="1" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="1" y="9" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="9" y="9" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        Dashboard
+      </a>
+
+      <a class="bam-nav-item" routerLink="create-campaign" routerLinkActive="active">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M8 5v6M5 8h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        Create Campaign
+      </a>
+
+      <a class="bam-nav-item" routerLink="my-campaigns" routerLinkActive="active">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <rect x="2" y="4" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M5 4V3a1 1 0 011-1h4a1 1 0 011 1v1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M5 8h6M5 11h3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        My Campaigns
+      </a>
+
+      <a class="bam-nav-item" routerLink="billing" routerLinkActive="active">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <rect x="1" y="3.5" width="14" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M1 6.5h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <rect x="3" y="8.5" width="4" height="2" rx="0.5" fill="currentColor"/>
+        </svg>
+        Billing
+      </a>
+
+      <a class="bam-nav-item" routerLink="support" routerLinkActive="active">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M6.2 6a1.8 1.8 0 013.6 0c0 1.2-1.8 1.8-1.8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="8" cy="12" r="0.75" fill="currentColor"/>
+        </svg>
+        Support
+      </a>
+    </div>
+
+    <!-- User -->
+    <div class="bam-user">
+      <span class="bam-user-avatar">AR</span>
+      <div class="bam-user-info">
+        <span class="bam-user-name">Arjun Reyes</span>
+        <span class="bam-user-plan">Pro Plan</span>
+      </div>
+    </div>
+
+  </nav>
+
+  <!-- ── Main Content ───────────────────────────────────── -->
+  <main class="bam-main">
+    <router-outlet></router-outlet>
+  </main>
+
+</div>

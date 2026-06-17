@@ -1,0 +1,206 @@
+.cds-form-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 28px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  max-width: 640px;
+}
+
+/* ── Field ────────────────────────────────────────────── */
+.cds-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  &--full  { width: 100%; }
+  &--half  { flex: 1; min-width: 0; }
+}
+
+/* ── Row (two-column) ─────────────────────────────────── */
+.cds-row {
+  display: flex;
+  gap: 16px;
+}
+
+/* ── Label ────────────────────────────────────────────── */
+.cds-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: 0.08em;
+}
+
+.cds-required {
+  color: #f97316;
+  margin-left: 2px;
+}
+
+/* ── Input ────────────────────────────────────────────── */
+.cds-input {
+  width: 100%;
+  padding: 10px 12px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.84rem;
+  color: #0f172a;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.15s, box-shadow 0.15s;
+
+  &::placeholder {
+    color: #cbd5e1;
+  }
+
+  &:focus {
+    border-color: #f97316;
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.08);
+  }
+
+  &--error {
+    border-color: #fca5a5;
+
+    &:focus {
+      border-color: #ef4444;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.08);
+    }
+  }
+}
+
+/* ── Textarea ─────────────────────────────────────────── */
+.cds-textarea-wrap {
+  position: relative;
+}
+
+.cds-textarea {
+  width: 100%;
+  padding: 10px 12px 28px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.84rem;
+  color: #0f172a;
+  outline: none;
+  resize: vertical;
+  box-sizing: border-box;
+  font-family: inherit;
+  line-height: 1.55;
+  transition: border-color 0.15s, box-shadow 0.15s;
+
+  &::placeholder {
+    color: #cbd5e1;
+  }
+
+  &:focus {
+    border-color: #f97316;
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.08);
+  }
+}
+
+.cds-char-count {
+  position: absolute;
+  bottom: 9px;
+  right: 12px;
+  font-size: 0.7rem;
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+/* ── Dropdown ─────────────────────────────────────────── */
+.cds-dropdown {
+  position: relative;
+  width: 100%;
+
+  &--open .cds-dropdown-trigger {
+    border-color: #f97316;
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.08);
+  }
+
+  &--error .cds-dropdown-trigger {
+    border-color: #fca5a5;
+  }
+}
+
+.cds-dropdown-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.84rem;
+  color: #0f172a;
+  cursor: pointer;
+  text-align: left;
+  box-sizing: border-box;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  gap: 8px;
+
+  &:hover { border-color: #cbd5e1; }
+}
+
+.cds-dropdown-placeholder { color: #cbd5e1; }
+
+.cds-chevron {
+  flex-shrink: 0;
+  color: #94a3b8;
+  transition: transform 0.15s;
+
+  &--up { transform: rotate(180deg); }
+}
+
+.cds-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  max-height: 220px;
+  overflow-y: auto;
+  padding: 4px;
+
+  &::-webkit-scrollbar { width: 4px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 4px; }
+}
+
+.cds-dropdown-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  font-size: 0.84rem;
+  color: #334155;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.1s;
+  gap: 8px;
+
+  &:hover { background: #f8fafc; }
+
+  &--selected {
+    color: #f97316;
+    font-weight: 600;
+    background: #fff7ed;
+  }
+}
+
+/* ── Validation Error ─────────────────────────────────── */
+.cds-error-msg {
+  font-size: 0.72rem;
+  color: #ef4444;
+  font-weight: 500;
+}

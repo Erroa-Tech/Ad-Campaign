@@ -1,0 +1,123 @@
+<div class="sp-page">
+
+  <!-- ── Page Header ──────────────────────────────────── -->
+  <div class="sp-header">
+    <div class="sp-header-left">
+      <h1 class="sp-title">Support</h1>
+      <p class="sp-subtitle">{{ activeCount }} open tickets</p>
+    </div>
+    <button class="sp-create-btn" (click)="openModal()">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+        <path d="M6.5 2v9M2 6.5h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      Create Ticket
+    </button>
+  </div>
+
+  <!-- ── Ticket Card ───────────────────────────────────── -->
+  <div class="sp-card">
+
+    <!-- Tab Row -->
+    <div class="sp-tab-row">
+      <div class="sp-tabs">
+        @for (tab of tabs; track tab.id) {
+          <button
+            class="sp-tab"
+            [class.sp-tab--active]="activeTab === tab.id"
+            (click)="setTab(tab.id)">
+            {{ tab.label }}
+            @if (tabCount(tab) > 0) {
+              <span class="sp-tab-count">{{ tabCount(tab) }}</span>
+            }
+          </button>
+        }
+      </div>
+
+      <!-- Search -->
+      <div class="sp-search">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <circle cx="6" cy="6" r="4.5" stroke="#94a3b8" stroke-width="1.4"/>
+          <path d="M10 10l2.5 2.5" stroke="#94a3b8" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+        <input
+          type="text"
+          class="sp-search-input"
+          placeholder="Search tickets..."
+          [(ngModel)]="searchQuery" />
+      </div>
+    </div>
+
+    <!-- Table -->
+    <table class="sp-table">
+      <thead>
+        <tr>
+          <th class="sp-th">TICKET ID</th>
+          <th class="sp-th">SUBJECT</th>
+          <th class="sp-th">CATEGORY</th>
+          <th class="sp-th">PRIORITY</th>
+          <th class="sp-th">STATUS</th>
+          <th class="sp-th">UPDATED</th>
+          <th class="sp-th sp-th--right">ACTION</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (ticket of filteredTickets; track ticket.id) {
+          <tr class="sp-row">
+
+            <!-- Ticket ID -->
+            <td class="sp-td sp-td--ticket">{{ ticket.ticketId }}</td>
+
+            <!-- Subject -->
+            <td class="sp-td">
+              <span class="sp-subject">{{ ticket.subject }}</span>
+              @if (ticket.campaignRef) {
+                <a class="sp-campaign-ref">#{{ ticket.campaignRef }}</a>
+              }
+            </td>
+
+            <!-- Category -->
+            <td class="sp-td sp-td--muted">{{ ticket.category }}</td>
+
+            <!-- Priority -->
+            <td class="sp-td">
+              <span class="sp-priority {{ priorityClass(ticket.priority) }}">{{ ticket.priority }}</span>
+            </td>
+
+            <!-- Status -->
+            <td class="sp-td">
+              <span class="sp-status {{ statusClass(ticket.status) }}">{{ ticket.status }}</span>
+            </td>
+
+            <!-- Updated -->
+            <td class="sp-td sp-td--updated">{{ ticket.updatedLabel }}</td>
+
+            <!-- Action -->
+            <td class="sp-td sp-td--right">
+              <button class="sp-view-btn" (click)="openChat(ticket)">
+             <img src="assets/icons/bubble-chat.png" alt="chat icon" class="chat-icon" />
+                Chat
+              </button>
+            </td>
+
+          </tr>
+        }
+
+        @if (filteredTickets.length === 0) {
+          <tr>
+            <td colspan="7" class="sp-empty">No tickets match your search.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
+
+@if (showModal) {
+  <app-create-ticket-modal (closed)="closeModal()" />
+}
+
+@if (selectedTicket) {
+  <app-ticket-chat-drawer [ticket]="selectedTicket" (closed)="closeChat()" />
+}

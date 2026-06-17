@@ -1,0 +1,285 @@
+.sp-page {
+  padding: 30px 32px;
+  background: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar { display: none; }
+}
+
+/* ── Page Header ─────────────────────────────────── */
+.sp-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.sp-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sp-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.sp-subtitle {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #94a3b8;
+}
+
+.sp-create-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  background: #f97316;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover { background: #ea580c; }
+}
+
+/* ── Ticket Card ─────────────────────────────────── */
+.sp-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* ── Tab Row ─────────────────────────────────────── */
+.sp-tab-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px 0 4px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.sp-tabs {
+  display: flex;
+}
+
+.sp-tab {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 14px 12px;
+  background: none;
+  border: none;
+  // border-bottom: 1px solid transparent;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+
+  &--active {
+    color: #f97316;
+    // border-bottom-color: #f97316;
+    background: #FFF7ED;
+    font-weight: 600;
+  }
+
+  &:hover:not(.sp-tab--active) { color: #334155; }
+}
+
+.sp-tab-count {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: inherit;
+}
+
+/* Search */
+.sp-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 7px;
+  background: #ffffff;
+  margin: 8px 0;
+  transition: border-color 0.12s;
+
+  &:focus-within { border-color: #cbd5e1; }
+}
+
+.sp-search-input {
+  border: none;
+  outline: none;
+  font-size: 0.81rem;
+  color: #334155;
+  width: 180px;
+  background: transparent;
+
+  &::placeholder { color: #94a3b8; }
+}
+
+/* ── Table ───────────────────────────────────────── */
+.sp-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.sp-th {
+  padding: 11px 16px;
+  text-align: left;
+  font-size: 0.71rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #94a3b8;
+  border-bottom: 1px solid #f1f5f9;
+  white-space: nowrap;
+  background: #ffffff;
+
+  &--right { text-align: right; }
+}
+
+.sp-row {
+  border-bottom: 1px solid #f8fafc;
+  transition: background 0.1s;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: #fafafa; }
+}
+
+.sp-td {
+  padding: 16px 16px;
+  font-size: 0.83rem;
+  color: #334155;
+  vertical-align: middle;
+
+  &--ticket  { color: #94a3b8; font-size: 0.8rem; white-space: nowrap; }
+  &--muted   { color: #64748b; }
+  &--updated { color: #94a3b8; font-size: 0.81rem; white-space: nowrap; }
+  &--right   { text-align: right; }
+}
+
+/* Subject cell */
+.sp-subject {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #0f172a;
+  line-height: 1.3;
+}
+
+.sp-campaign-ref {
+  display: inline-block;
+  font-size: 0.78rem;
+  color: #f97316;
+  margin-top: 3px;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover { text-decoration: underline; }
+}
+
+/* ── Priority Badge ──────────────────────────────── */
+.sp-priority {
+  display: inline-flex;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+
+  &--high   { background: #fef2f2; color: #dc2626; }
+  &--medium { background: #fefce8; color: #ca8a04; }
+  &--low    { background: #f8fafc; color: #64748b; }
+}
+
+/* ── Status Badge ────────────────────────────────── */
+.sp-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+
+  &::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Pill variants */
+  &--open,
+  &--in-progress {
+    padding: 3px 10px 3px 8px;
+    border-radius: 20px;
+    border: 1px solid;
+  }
+
+  &--open {
+    color: #d97706;
+    border-color: #fde68a;
+    background: #fefce8;
+    &::before { background: #f59e0b; }
+  }
+
+  &--in-progress {
+    color: #1d4ed8;
+    border-color: #bfdbfe;
+    background: #eff6ff;
+    &::before { background: #3b82f6; }
+  }
+
+  &--resolved {
+    color: #16a34a;
+    &::before { background: #16a34a; }
+  }
+
+  &--closed {
+    color: #94a3b8;
+    &::before { background: #94a3b8; }
+  }
+}
+
+/* ── View Button ─────────────────────────────────── */
+.sp-view-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 7px;
+  background: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #475569;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+
+  &:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+  }
+}
+
+/* ── Empty State ─────────────────────────────────── */
+.sp-empty {
+  padding: 48px 16px;
+  text-align: center;
+  font-size: 0.84rem;
+  color: #94a3b8;
+}

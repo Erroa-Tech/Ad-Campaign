@@ -1,0 +1,141 @@
+.ar-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Header */
+.ar-header {
+  padding: 20px 20px 14px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.ar-title-row {
+  display: flex;
+  align-items:space-between;
+  gap: 100px;
+  margin-bottom: 4px;
+}
+
+.ar-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.ar-badge {
+  display: grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  background: #FEE2E2;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #991B1B;
+}
+
+.ar-sub {
+  margin: 0;
+  font-size: 0.76rem;
+  color: #94a3b8;
+}
+
+/* List */
+.ar-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Item */
+.ar-item {
+  display: flex;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f8fafc;
+  align-items: flex-start;
+
+  &:last-child { border-bottom: none; }
+}
+
+.ar-item-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.ar-icon-alert {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.ar-icon-billing {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.ar-icon-calendar {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.ar-icon-pending {
+  background: #fffbeb;
+  color: #d97706;
+}
+
+/* Body */
+.ar-item-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.ar-item-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.ar-item-title {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #0f172a;
+  line-height: 1.35;
+}
+
+.ar-item-time {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.ar-item-desc {
+  margin: 0 0 8px;
+  font-size: 0.76rem;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.ar-item-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #f97316;
+  text-decoration: none;
+  transition: color 0.12s;
+
+  &:hover { color: #ea580c; }
+}

@@ -1,0 +1,204 @@
+.vr-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Card ────────────────────────────────────────────── */
+.vr-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.vr-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  border-bottom: 1px solid #f1f5f9;
+  background: #fafafa;
+}
+
+.vr-section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #f97316;
+  letter-spacing: 0.1em;
+}
+
+.vr-card-body {
+  padding: 20px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.vr-card-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.vr-card-desc {
+  margin: 0;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  line-height: 1.45;
+}
+
+.vr-divider {
+  height: 1px;
+  background: #f1f5f9;
+}
+
+/* ── Edit button (in card header) ────────────────────── */
+.vr-edit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 7px;
+  background: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #475569;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+
+  &:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+  }
+}
+
+/* ── Advertiser summary grid (2-col, 3-row) ──────────── */
+.vr-summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 32px;
+}
+
+.vr-summary-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.vr-sum-label {
+  font-size: 0.76rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.vr-sum-value {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* ── Two-column layout for company + docs ────────────── */
+.vr-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+/* ── Company info rows ───────────────────────────────── */
+.vr-row-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.vr-info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f8fafc;
+
+  &:last-child { border-bottom: none; }
+}
+
+.vr-info-label {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  font-weight: 500;
+  width: 130px;
+  flex-shrink: 0;
+}
+
+.vr-info-value {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #0f172a;
+  word-break: break-word;
+}
+
+/* ── Document list ───────────────────────────────────── */
+.vr-doc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.vr-doc-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f8fafc;
+
+  &:last-child { border-bottom: none; }
+}
+
+.vr-doc-check { flex-shrink: 0; }
+
+.vr-doc-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.vr-doc-name {
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: #0f172a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vr-doc-meta {
+  font-size: 0.74rem;
+  color: #94a3b8;
+}
+
+.vr-ready-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.vr-no-docs {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #94a3b8;
+  text-align: center;
+  padding: 24px 0;
+}

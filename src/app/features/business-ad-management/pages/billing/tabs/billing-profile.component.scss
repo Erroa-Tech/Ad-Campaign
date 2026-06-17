@@ -1,0 +1,181 @@
+/* ── Page ───────────────────────────────────────────────── */
+.bp-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── GSTIN banner ───────────────────────────────────────── */
+.bp-gstin-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 20px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 10px;
+}
+
+.bp-gstin-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.bp-gstin-label {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #15803d;
+}
+
+.bp-gstin-divider {
+  color: #86efac;
+  font-weight: 400;
+}
+
+.bp-gstin-sub {
+  font-size: 0.82rem;
+  color: #4ade80;
+  color: #166534;
+}
+
+.bp-edit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 16px;
+  border-radius: 8px;
+  background: #f97316;
+  color: #ffffff;
+  border: 1px solid #f97316;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.12s, border-color 0.12s;
+  flex-shrink: 0;
+
+  &:hover { background: #ea6c0a; border-color: #ea6c0a; }
+}
+
+/* ── Info card ──────────────────────────────────────────── */
+.bp-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.bp-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 20px;
+  border-bottom: 1px solid #f1f5f9;
+  background: #ffffff;
+}
+
+.bp-card-title {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+/* ── Field rows ─────────────────────────────────────────── */
+.bp-fields {
+  display: flex;
+  flex-direction: column;
+}
+
+.bp-field-row {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  border-bottom: 1px solid #f8fafc;
+  transition: background 0.1s;
+
+  &:last-child { border-bottom: none; }
+  &:hover      { background: #fafbfc; }
+}
+
+.bp-field-label {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.bp-field-value {
+  font-size: 0.84rem;
+  color: #0f172a;
+  font-weight: 500;
+}
+
+/* Editable input */
+.bp-field-input {
+  width: 100%;
+  max-width: 440px;
+  padding: 7px 11px;
+  border: 1px solid #e2e8f0;
+  border-radius: 7px;
+  background: #ffffff;
+  font-size: 0.84rem;
+  color: #0f172a;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.12s, box-shadow 0.12s;
+
+  &::placeholder { color: #94a3b8; }
+
+  &:focus {
+    border-color: #f97316;
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+  }
+}
+
+/* ── Edit footer ────────────────────────────────────────── */
+.bp-edit-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 0 4px;
+  animation: bp-fade-in 0.15s ease forwards;
+}
+
+@keyframes bp-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.bp-footer-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 22px;
+  border-radius: 8px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+
+  &--save {
+    background: #f97316;
+    color: #ffffff;
+    border: 1px solid #f97316;
+
+    &:hover { background: #ea6c0a; border-color: #ea6c0a; }
+  }
+
+  &--cancel {
+    background: #ffffff;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+
+    &:hover { background: #f8fafc; border-color: #cbd5e1; }
+  }
+}

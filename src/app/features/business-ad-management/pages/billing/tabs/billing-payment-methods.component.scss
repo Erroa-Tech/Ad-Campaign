@@ -1,0 +1,410 @@
+/* ── Page ───────────────────────────────────────────────── */
+.bpm-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Section card ───────────────────────────────────────── */
+.bpm-section {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Section header */
+.bpm-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.bpm-section-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bpm-section-icon {
+  flex-shrink: 0;
+  color: #475569;
+}
+
+.bpm-section-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.bpm-count-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #64748b;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 2px 9px;
+}
+
+/* Add buttons */
+.bpm-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s, opacity 0.12s;
+
+  &--primary {
+    background: #f97316;
+    color: #ffffff;
+    border: 1px solid #f97316;
+
+    &:hover { background: #ea6c0a; border-color: #ea6c0a; }
+  }
+
+  &--outline {
+    background: #ffffff;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+
+    &:hover { background: #f8fafc; border-color: #cbd5e1; }
+  }
+}
+
+/* ── Item list ──────────────────────────────────────────── */
+.bpm-items {
+  display: flex;
+  flex-direction: column;
+}
+
+.bpm-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f1f5f9;
+  transition: background 0.1s;
+
+  &:last-child { border-bottom: none; }
+  &:hover      { background: #fafafa; }
+}
+
+/* ── Card thumbnail ─────────────────────────────────────── */
+.bpm-card-thumb {
+  width: 64px;
+  height: 42px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #1a56db 0%, #2d6fdb 100%);
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 6px 8px;
+  overflow: hidden;
+
+  &--mc {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.07);
+  }
+}
+
+.bpm-card-chip {
+  width: 14px;
+  height: 10px;
+  border-radius: 2px;
+  background: rgba(255, 210, 100, 0.85);
+  border: 1px solid rgba(255, 190, 60, 0.6);
+}
+
+.bpm-card-lines {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+}
+
+.bpm-card-dots {
+  font-size: 0.38rem;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 1px;
+}
+
+.bpm-card-last4 {
+  font-size: 0.46rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+
+/* Network badges */
+.bpm-card-network {
+  position: absolute;
+  bottom: 5px;
+  right: 6px;
+}
+
+.bpm-card-network--visa {
+  font-size: 0.5rem;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+  font-style: italic;
+}
+
+.bpm-card-network--mc {
+  display: flex;
+}
+
+.bpm-mc-circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+
+  &--left  { background: #eb001b; }
+  &--right { background: #f79e1b; margin-left: -4px; mix-blend-mode: multiply; }
+}
+
+/* ── UPI / Bank thumbnails ──────────────────────────────── */
+.bpm-upi-thumb,
+.bpm-bank-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.bpm-upi-thumb  { background: #f5f3ff; }
+.bpm-bank-thumb { background: #eff6ff; }
+
+/* ── Item info ──────────────────────────────────────────── */
+.bpm-item-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.bpm-item-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bpm-item-name {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #0f172a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bpm-item-meta {
+  font-size: 0.76rem;
+  color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* DEFAULT badge */
+.bpm-default-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  color: #c2410c;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+}
+
+/* ── Item actions ───────────────────────────────────────── */
+.bpm-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* Set Default button */
+.bpm-set-default-btn {
+  padding: 5px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #475569;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.12s, border-color 0.12s;
+
+  &:hover { background: #f8fafc; border-color: #cbd5e1; }
+}
+
+/* Icon buttons */
+.bpm-icon-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+
+  &--edit {
+    // border: 1px solid #e2e8f0;
+    background: #ffffff;
+    // color: #64748b;
+
+    &:hover { background: #f8fafc; border-color: #cbd5e1; color: #0f172a; }
+  }
+
+  &--delete {
+    // border: 1px solid #fecaca;
+    background: #fff5f5;
+    // color: #dc2626;
+
+    &:hover { background: #fee2e2; border-color: #fca5a5; }
+  }
+}
+
+/* ── Empty state ────────────────────────────────────────── */
+.bpm-empty {
+  padding: 28px 20px;
+  text-align: center;
+  font-size: 0.82rem;
+  color: #94a3b8;
+}
+
+/* ── Inline add form ────────────────────────────────────── */
+.bpm-add-form {
+  padding: 20px;
+  border-top: 1px solid #f1f5f9;
+  background: #fafbfc;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: bpm-form-in 0.18s ease forwards;
+}
+
+@keyframes bpm-form-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.bpm-add-form-title {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* Form layout */
+.bpm-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.bpm-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bpm-form-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: 0.07em;
+}
+
+.bpm-form-input {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  font-size: 0.84rem;
+  color: #0f172a;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.12s, box-shadow 0.12s;
+
+  &::placeholder { color: #94a3b8; }
+
+  &:focus {
+    border-color: #f97316;
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+  }
+}
+
+.bpm-form-select {
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M6 9l6 6 6-6' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 30px;
+}
+
+/* Form action buttons */
+.bpm-form-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bpm-form-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+
+  &--save {
+    background: #f97316;
+    color: #ffffff;
+    border: 1px solid #f97316;
+
+    &:hover { background: #ea6c0a; border-color: #ea6c0a; }
+  }
+
+  &--cancel {
+    background: #ffffff;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+
+    &:hover { background: #f8fafc; border-color: #cbd5e1; }
+  }
+}

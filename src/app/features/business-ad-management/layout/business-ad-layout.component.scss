@@ -1,0 +1,162 @@
+.bam-shell {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background: #f8fafc;
+}
+
+/* ── Sidebar ──────────────────────────────────────────── */
+.bam-sidebar {
+  width: 192px;
+  flex-shrink: 0;
+  background: #0f172a;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0 0;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar { display: none; }
+}
+
+/* Brand */
+.bam-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px 28px;
+  border-bottom: 1px solid #1e293b;
+  margin-bottom: 20px;
+}
+
+.bam-brand-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #f97316;
+  display: grid;
+  place-items: center;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #ffffff;
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+}
+
+.bam-brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.bam-brand-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.bam-brand-sub {
+  font-size: 0.65rem;
+  color: #475569;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* Navigation */
+.bam-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 8px;
+  flex: 1;
+}
+
+.bam-nav-label {
+  display: block;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #334155;
+  letter-spacing: 0.12em;
+  padding: 0 8px 10px;
+}
+
+.bam-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #64748b;
+  text-decoration: none;
+  transition: background 0.12s, color 0.12s;
+
+  svg { flex-shrink: 0; }
+
+  &:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.05);
+    color: #94a3b8;
+  }
+
+  &.active {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+  }
+}
+
+/* User footer */
+.bam-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  border-top: 1px solid #1e293b;
+  margin-top: auto;
+}
+
+.bam-user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #f97316;
+  display: grid;
+  place-items: center;
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #ffffff;
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+}
+
+.bam-user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.bam-user-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1;
+}
+
+.bam-user-plan {
+  font-size: 0.66rem;
+  color: #475569;
+  line-height: 1;
+}
+
+/* ── Main Content ─────────────────────────────────────── */
+.bam-main {
+  flex: 1;
+  overflow-y: auto;
+  min-width: 0;
+}

@@ -1,0 +1,255 @@
+<div class="bt-container">
+
+  <!-- ── Stat bar ─────────────────────────────────────────── -->
+  <div class="bt-stats-bar">
+
+    <div class="bt-stat">
+      <p class="bt-stat-count">{{ totalTransactions }}</p>
+      <p class="bt-stat-label">Total Transactions</p>
+    </div>
+
+    <div class="bt-stat-divider"></div>
+
+    <div class="bt-stat">
+      <div class="bt-stat-value-row">
+        <div class="bt-stat-icon bt-stat-icon--red">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+            <path d="M7 7l10 10M17 7v10H7" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="bt-stat-amount bt-stat-amount--red">{{ formatStat(totalSpend) }}</span>
+      </div>
+      <p class="bt-stat-label">Total Spend</p>
+    </div>
+
+    <div class="bt-stat-divider"></div>
+
+    <div class="bt-stat">
+      <div class="bt-stat-value-row">
+        <div class="bt-stat-icon bt-stat-icon--green">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+            <path d="M17 17l-10-10M7 17V7h10" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="bt-stat-amount bt-stat-amount--green">{{ formatStat(totalTopups) }}</span>
+      </div>
+      <p class="bt-stat-label">Total Top-ups</p>
+    </div>
+
+    <div class="bt-stat-divider"></div>
+
+    <div class="bt-stat">
+      <p class="bt-stat-amount bt-stat-amount--green">{{ formatStat(netBalance) }}</p>
+      <p class="bt-stat-label">Net Balance</p>
+    </div>
+
+  </div>
+
+  <!-- ── Filter bar ───────────────────────────────────────── -->
+  <div class="bt-filter-bar">
+
+    <div class="bt-filter-left">
+
+      <!-- Filter label -->
+      <div class="bt-filter-tag">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+          <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"
+            stroke="#64748b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="bt-filter-label">Filters:</span>
+      </div>
+
+      <!-- Date dropdown -->
+      <div class="bt-dropdown">
+        <button class="bt-dropdown-trigger" type="button" (click)="toggleDateDrop($event)">
+          {{ activeDateLabel }}
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+            [class.bt-chevron--up]="showDateDrop">
+            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        @if (showDateDrop) {
+          <div class="bt-dropdown-menu">
+            @for (opt of dateOptions; track opt.value) {
+              <button class="bt-dropdown-opt"
+                [class.bt-dropdown-opt--active]="dateFilter === opt.value"
+                (click)="setDateFilter(opt.value, $event)">
+                {{ opt.label }}
+              </button>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Type dropdown -->
+      <div class="bt-dropdown">
+        <button class="bt-dropdown-trigger" type="button" (click)="toggleTypeDrop($event)">
+          {{ activeTypeLabel }}
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+            [class.bt-chevron--up]="showTypeDrop">
+            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        @if (showTypeDrop) {
+          <div class="bt-dropdown-menu">
+            @for (opt of typeOptions; track opt.value) {
+              <button class="bt-dropdown-opt"
+                [class.bt-dropdown-opt--active]="typeFilter === opt.value"
+                (click)="setTypeFilter(opt.value, $event)">
+                {{ opt.label }}
+              </button>
+            }
+          </div>
+        }
+      </div>
+
+    </div>
+
+    <!-- Search -->
+    <div class="bt-search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+        <circle cx="11" cy="11" r="8" stroke="#94a3b8" stroke-width="1.8"/>
+        <path d="M21 21l-4.35-4.35" stroke="#94a3b8" stroke-width="1.8"
+          stroke-linecap="round"/>
+      </svg>
+      <input
+        class="bt-search-input"
+        type="text"
+        placeholder="Search ID or campaign..."
+        [(ngModel)]="searchQuery"
+        (ngModelChange)="onSearch()" />
+    </div>
+
+  </div>
+
+  <!-- ── Table ────────────────────────────────────────────── -->
+  <div class="bt-table-wrap">
+    <table class="bt-table">
+      <thead class="bt-thead">
+        <tr>
+          <th class="bt-th bt-th--sortable" (click)="sortBy('txnId')">
+            TRANSACTION ID
+            <svg class="bt-sort" width="10" height="10" viewBox="0 0 24 24" fill="none"
+              [class.bt-sort--active]="sortField === 'txnId'">
+              <path d="M12 5v14M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </th>
+          <th class="bt-th bt-th--sortable" (click)="sortBy('date')">
+            DATE
+            <svg class="bt-sort" width="10" height="10" viewBox="0 0 24 24" fill="none"
+              [class.bt-sort--active]="sortField === 'date'">
+              <path d="M12 5v14M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </th>
+          <th class="bt-th">CAMPAIGN</th>
+          <th class="bt-th">TYPE</th>
+          <th class="bt-th bt-th--sortable" (click)="sortBy('amount')">
+            AMOUNT
+            <svg class="bt-sort" width="10" height="10" viewBox="0 0 24 24" fill="none"
+              [class.bt-sort--active]="sortField === 'amount'">
+              <path d="M12 5v14M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </th>
+          <th class="bt-th">TAX</th>
+          <th class="bt-th">PAYMENT METHOD</th>
+          <th class="bt-th">STATUS</th>
+          <th class="bt-th">VIEW</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of paginatedRows; track row.id) {
+          <tr class="bt-tr">
+
+            <td class="bt-td bt-td--id">{{ row.txnId }}</td>
+
+            <td class="bt-td">{{ formatDate(row.date) }}</td>
+
+            <td class="bt-td bt-td--campaign">
+              {{ row.campaign || '—' }}
+            </td>
+
+            <td class="bt-td">
+              <span class="bt-type-badge" [class]="typeClass(row.type)">
+                <span class="bt-badge-dot"></span>
+                {{ row.type }}
+              </span>
+            </td>
+
+            <td class="bt-td bt-td--amount"
+              [class.bt-td--neg]="row.amount < 0"
+              [class.bt-td--pos]="row.amount > 0">
+              {{ formatAmount(row.amount) }}
+            </td>
+
+            <td class="bt-td bt-td--muted">{{ formatTax(row.tax) }}</td>
+
+            <td class="bt-td bt-td--muted">{{ row.paymentMethod }}</td>
+
+            <td class="bt-td">
+              <span class="bt-status-badge" [class]="statusClass(row.status)">
+                <span class="bt-badge-dot"></span>
+                {{ row.status }}
+              </span>
+            </td>
+
+            <td class="bt-td">
+              <button class="bt-view-btn" type="button" (click)="openDetail(row)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
+                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/>
+                </svg>
+                View
+              </button>
+            </td>
+
+          </tr>
+        }
+
+        @if (paginatedRows.length === 0) {
+          <tr>
+            <td class="bt-td bt-empty" colspan="9">No transactions match your filters.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── Pagination ────────────────────────────────────────── -->
+  <div class="bt-pagination">
+    <span class="bt-page-info">
+      Showing {{ showingFrom }}–{{ showingTo }} of {{ filtered.length }}
+    </span>
+    <div class="bt-page-btns">
+      <button class="bt-page-btn bt-page-btn--nav"
+        [disabled]="currentPage === 1"
+        (click)="goToPage(currentPage - 1)">
+        ←
+      </button>
+      @for (p of pages; track p) {
+        <button class="bt-page-btn"
+          [class.bt-page-btn--active]="p === currentPage"
+          (click)="goToPage(p)">
+          {{ p }}
+        </button>
+      }
+      <button class="bt-page-btn bt-page-btn--nav"
+        [disabled]="currentPage === totalPages"
+        (click)="goToPage(currentPage + 1)">
+        →
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── Transaction detail drawer ─────────────────────────── -->
+@if (selectedTransaction) {
+  <app-transaction-detail-drawer
+    [transaction]="selectedTransaction"
+    (closed)="closeDetail()" />
+}

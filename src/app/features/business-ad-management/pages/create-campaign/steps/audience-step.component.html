@@ -1,0 +1,342 @@
+<div class="as-card" [formGroup]="form">
+
+  <!-- ── GENDER ─────────────────────────────────────── -->
+  <div class="as-section">
+    <p class="as-section-label">GENDER</p>
+    <div class="as-toggle-row">
+      <button type="button" class="as-toggle" [class.as-toggle--on]="gender === 'all'"    (click)="setGender('all')">All Genders</button>
+      <button type="button" class="as-toggle" [class.as-toggle--on]="gender === 'male'"   (click)="setGender('male')">Male</button>
+      <button type="button" class="as-toggle" [class.as-toggle--on]="gender === 'female'" (click)="setGender('female')">Female</button>
+    </div>
+  </div>
+
+  <!-- ── AGE GROUP ──────────────────────────────────── -->
+  <div class="as-section">
+    <div class="as-section-header-row">
+      <p class="as-section-label">AGE GROUP</p>
+      <span class="as-age-range-val">{{ selectedAgeLabel }}</span>
+    </div>
+
+    <div class="as-age-slider-wrap">
+      <!-- value bubbles above each thumb -->
+      <div class="as-age-thumb-tip" [style.left]="ageMinThumbLeft">{{ ageMinVal }}</div>
+      <div class="as-age-thumb-tip" [style.left]="ageMaxThumbLeft">{{ ageMaxVal === AGE_MAX ? ageMaxVal + '+' : ageMaxVal }}</div>
+
+      <div class="as-age-track-bg"></div>
+      <div class="as-age-track-fill"
+           [style.left]="ageTrackLeft"
+           [style.width]="ageTrackWidth"></div>
+      <input
+        type="range"
+        class="as-age-range"
+        [min]="AGE_MIN"
+        [max]="AGE_MAX"
+        [value]="ageMinVal"
+        (input)="onAgeMinChange($event)" />
+      <input
+        type="range"
+        class="as-age-range"
+        [min]="AGE_MIN"
+        [max]="AGE_MAX"
+        [value]="ageMaxVal"
+        (input)="onAgeMaxChange($event)" />
+    </div>
+
+    <div class="as-age-bounds">
+      <span>{{ AGE_MIN }}</span>
+      <span>{{ AGE_MAX }}+</span>
+    </div>
+  </div>
+
+  <!-- ── LOCATION TARGETING ─────────────────────────── -->
+  <div class="as-location-block">
+
+    <div class="as-location-header">
+      <!-- Pin icon -->
+       <img src="assets/icons/location_Icon.png" alt="Pin Icon">
+      <span class="as-location-title">LOCATION TARGETING</span>
+    </div>
+
+    <!-- COUNTRIES -->
+    <div class="as-sub-section">
+      <div class="as-sub-header">
+         <img src="assets/icons/country_Icon.png" alt="Pin Icon">
+        <span class="as-sub-label">COUNTRIES</span>
+        @if (selectedCountries.length > 0) {
+          <button type="button" class="as-clear-btn" (click)="clearCountries()">Clear all</button>
+        }
+      </div>
+
+      <div class="as-select-field" (click)="openCountryDropdown($event)">
+        <span class="as-select-text">
+          {{ selectedCountries.length > 0 ? selectedCountries.length + ' selected' : 'Select countries...' }}
+        </span>
+        @if (selectedCountries.length > 0) {
+          <span class="as-select-badge">{{ selectedCountries.length }}</span>
+        }
+      </div>
+
+      @if (showCountryDropdown) {
+        <div class="as-dropdown" (click)="stopProp($event)">
+          <input
+            class="as-dropdown-search"
+            type="text"
+            placeholder="Search countries..."
+            [value]="countryQuery"
+            (input)="onCountrySearch($event)" />
+          <div class="as-dropdown-list">
+            @for (country of filteredCountries; track country) {
+              <div class="as-dropdown-item" (click)="addCountry(country)">{{ country }}</div>
+            }
+            @if (filteredCountries.length === 0) {
+              <div class="as-dropdown-empty">No results</div>
+            }
+          </div>
+        </div>
+      }
+
+      @if (selectedCountries.length > 0) {
+        <div class="as-tags-row">
+          @for (c of selectedCountries; track c) {
+            <span class="as-tag">
+              {{ c }}
+              <button type="button" class="as-tag-x" (click)="removeCountry(c)">×</button>
+            </span>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- STATES / REGIONS -->
+    <div class="as-sub-section">
+      <div class="as-sub-header">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="#64748b" stroke-width="1.6"/>
+          <circle cx="12" cy="12" r="4"  stroke="#64748b" stroke-width="1.6"/>
+          <path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="#64748b" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <span class="as-sub-label">STATES / REGIONS</span>
+        @if (selectedStates.length > 0) {
+          <button type="button" class="as-clear-btn" (click)="clearStates()">Clear all</button>
+        }
+      </div>
+
+      <div
+        class="as-select-field"
+        [class.as-select-field--disabled]="availableStates.length === 0"
+        (click)="openStateDropdown($event)">
+        <span class="as-select-text">
+          {{ selectedStates.length > 0 ? selectedStates.length + ' selected' : (availableStates.length ? 'Select states...' : 'Select a country first') }}
+        </span>
+        @if (selectedStates.length > 0) {
+          <span class="as-select-badge">{{ selectedStates.length }}</span>
+        }
+      </div>
+
+      @if (showStateDropdown) {
+        <div class="as-dropdown" (click)="stopProp($event)">
+          <input
+            class="as-dropdown-search"
+            type="text"
+            placeholder="Search states..."
+            [value]="stateQuery"
+            (input)="onStateSearch($event)" />
+          <div class="as-dropdown-list">
+            @for (state of filteredStates; track state) {
+              <div class="as-dropdown-item" (click)="addState(state)">{{ state }}</div>
+            }
+            @if (filteredStates.length === 0) {
+              <div class="as-dropdown-empty">No results</div>
+            }
+          </div>
+        </div>
+      }
+
+      @if (selectedStates.length > 0) {
+        <div class="as-tags-row">
+          @for (s of selectedStates; track s) {
+            <span class="as-tag">
+              {{ s }}
+              <button type="button" class="as-tag-x" (click)="removeState(s)">×</button>
+            </span>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- CITIES -->
+    <div class="as-sub-section">
+      <div class="as-sub-header">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+          <path d="M3 21h18M5 21V7l7-4 7 4v14" stroke="#64748b" stroke-width="1.6"
+            stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9 21v-4h6v4" stroke="#64748b" stroke-width="1.6"
+            stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="as-sub-label">CITIES</span>
+        @if (selectedCities.length > 0) {
+          <button type="button" class="as-clear-btn" (click)="clearCities()">Clear all</button>
+        }
+      </div>
+
+      <div
+        class="as-select-field"
+        [class.as-select-field--disabled]="availableCities.length === 0"
+        (click)="openCityDropdown($event)">
+        <span class="as-select-text">
+          {{ selectedCities.length > 0 ? selectedCities.length + ' selected' : (availableCities.length ? 'Select cities...' : 'Select a state first') }}
+        </span>
+        @if (selectedCities.length > 0) {
+          <span class="as-select-badge">{{ selectedCities.length }}</span>
+        }
+      </div>
+
+      @if (showCityDropdown) {
+        <div class="as-dropdown" (click)="stopProp($event)">
+          <input
+            class="as-dropdown-search"
+            type="text"
+            placeholder="Search cities..."
+            [value]="cityQuery"
+            (input)="onCitySearch($event)" />
+          <div class="as-dropdown-list">
+            @for (city of filteredCities; track city) {
+              <div class="as-dropdown-item" (click)="addCity(city)">{{ city }}</div>
+            }
+            @if (filteredCities.length === 0) {
+              <div class="as-dropdown-empty">No results</div>
+            }
+          </div>
+        </div>
+      }
+
+      @if (selectedCities.length > 0) {
+        <div class="as-tags-row">
+          @for (city of selectedCities; track city) {
+            <span class="as-tag">
+              {{ city }}
+              <button type="button" class="as-tag-x" (click)="removeCity(city)">×</button>
+            </span>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- PIN / POSTAL CODES -->
+    <div class="as-sub-section">
+      <div class="as-sub-header">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+          <path d="M4 9h16M4 15h16M10 3L8 21M16 3l-2 18"
+            stroke="#64748b" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <span class="as-sub-label">PIN / POSTAL CODES</span>
+        @if (pinCodes.length > 0) {
+          <button type="button" class="as-clear-btn" (click)="clearPinCodes()">Clear all</button>
+        }
+      </div>
+
+      <div class="as-pin-input-row">
+        <div class="as-pin-field-wrap"
+             [class.as-pin-field--error]="pinCodeInputError"
+             [class.as-pin-field--valid]="pinCodeValid">
+          <input
+            class="as-pin-field"
+            type="text"
+            [placeholder]="pinCodePlaceholder"
+            [value]="pinCodeInput"
+            maxlength="12"
+            (input)="onPinCodeTyping($event)"
+            (keydown)="onPinCodeKeydown($event)" />
+          @if (pinCodeValid && pinCodeMatchIso) {
+            <span class="as-pin-iso-badge">{{ pinCodeMatchIso }}</span>
+          } @else if (pinCodeChecking) {
+            <span class="as-pin-iso-badge as-pin-iso-badge--checking">…</span>
+          }
+        </div>
+        <button
+          type="button"
+          class="as-pin-add-btn"
+          [disabled]="!pinCodeValid"
+          (click)="addPinCode()">
+          Add
+        </button>
+      </div>
+
+      @if (pinCodeInputError) {
+        <p class="as-pin-error">{{ pinCodeInputError }}</p>
+      } @else if (pinCodeChecking) {
+        <p class="as-pin-hint as-pin-hint--checking">Verifying pin code…</p>
+      } @else if (pinCodeValid) {
+        <p class="as-pin-hint">
+          Press Enter or click Add
+          @if (pinCodeMatchIso) { — valid {{ pinCodeMatchIso }} code }
+        </p>
+      }
+
+      @if (pinCodes.length > 0) {
+        <div class="as-tags-row">
+          @for (pin of pinCodes; track pin.code) {
+            <span class="as-tag as-pin-tag">
+              <span class="as-pin-code">{{ pin.code }}</span>
+              @if (pin.iso) {
+                <span class="as-pin-iso">{{ pin.iso }}</span>
+              }
+              <button type="button" class="as-tag-x" (click)="removePinCode(pin.code)">×</button>
+            </span>
+          }
+        </div>
+      }
+    </div>
+
+  </div>
+
+  <!-- ── SELECTED TARGETING ─────────────────────────── -->
+  @if (hasTargeting) {
+    <div class="as-targeting-box">
+      <p class="as-box-label">SELECTED TARGETING</p>
+      @for (country of selectedCountries; track country) {
+        <div class="as-targeting-row">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" stroke="#64748b" stroke-width="1.6"/>
+            <path d="M2 12h20M12 2c-4 4-4 16 0 16s4-12 0-16" stroke="#64748b" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          <span>{{ country }}</span>
+        </div>
+      }
+      @if (selectedStates.length > 0) {
+        <div class="as-targeting-row">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" stroke="#64748b" stroke-width="1.6"/>
+            <circle cx="12" cy="12" r="4"  stroke="#64748b" stroke-width="1.6"/>
+            <path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="#64748b" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          <span>{{ stateSummaryLabel }}</span>
+        </div>
+      }
+      @if (selectedCities.length > 0) {
+        <div class="as-targeting-row">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+            <path d="M3 21h18M5 21V7l7-4 7 4v14" stroke="#64748b" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9 21v-4h6v4" stroke="#64748b" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>{{ citySummaryLabel }}</span>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- ── ESTIMATED REACH ────────────────────────────── -->
+  <div class="as-reach-box">
+    <div class="as-reach-top">
+      <span class="as-box-label">ESTIMATED REACH</span>
+      <span class="as-reach-update">Updates as you refine targeting</span>
+    </div>
+    <div class="as-reach-value">
+      {{ reachRange.low }}–{{ reachRange.high }}<span class="as-reach-unit"> users</span>
+    </div>
+    <p class="as-reach-desc">{{ reachDescription }}</p>
+  </div>
+
+</div>

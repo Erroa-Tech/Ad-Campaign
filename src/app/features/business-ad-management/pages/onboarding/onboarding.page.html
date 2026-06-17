@@ -1,0 +1,189 @@
+<div class="ao-layout">
+
+  <!-- ══ SIDEBAR ═══════════════════════════════════════════ -->
+  <aside class="ao-sidebar">
+    <div class="ao-sidebar-inner">
+
+      <!-- Brand -->
+      <div class="ao-brand">
+        <div class="ao-brand-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+              stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <p class="ao-brand-name">AdManager</p>
+          <p class="ao-brand-sub">Advertiser onboarding</p>
+        </div>
+      </div>
+
+      <!-- Info text -->
+      <p class="ao-sidebar-info">
+        Verify your business once to unlock campaign creation, billing tools, and ad approvals.
+      </p>
+
+      <div class="ao-sidebar-divider"></div>
+
+      <!-- Steps -->
+      <nav class="ao-steps" aria-label="Onboarding steps">
+        @for (step of steps; track step.number) {
+          <div
+            class="ao-step"
+            [class.ao-step--active]="step.status === 'active'"
+            [class.ao-step--completed]="step.status === 'completed'">
+
+            <!-- Icon -->
+            <div class="ao-step-icon-wrap">
+              @if (step.status === 'completed') {
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                  <path d="M20 6L9 17l-5-5" stroke="white" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              } @else if (step.icon === 'user') {
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                  <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              } @else if (step.icon === 'building') {
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                  <path d="M3 21h18M5 21V5a2 2 0 012-2h10a2 2 0 012 2v16M9 9h1M9 13h1M9 17h1M14 9h1M14 13h1M14 17h1"
+                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              } @else if (step.icon === 'document') {
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                  <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 012-2h2a2 2 0 012 2v0a2 2 0 01-2 2h-2a2 2 0 01-2-2zm-1 8l2 2 4-4"
+                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              } @else {
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              }
+            </div>
+
+            <!-- Text -->
+            <div class="ao-step-text">
+              <span class="ao-step-label">{{ step.label }}</span>
+              <span class="ao-step-sub">{{ step.subtitle }}</span>
+            </div>
+
+          </div>
+        }
+      </nav>
+
+    </div>
+
+    <!-- Footer help -->
+    <p class="ao-sidebar-footer-text">
+      Need help? Compliance support replies within one business day.
+    </p>
+  </aside>
+
+  <!-- ══ MAIN CONTENT ══════════════════════════════════════ -->
+  <main class="ao-main">
+
+    <!-- Page header (sticky) -->
+    <div class="ao-page-header">
+      <div class="ao-page-header-top">
+        <div class="ao-page-header-left">
+          <p class="ao-step-meta">STEP {{ currentStep }} OF {{ totalSteps }} · {{ activeStep.category }}</p>
+          <h1 class="ao-page-title">{{ activeStep.label }}</h1>
+          <p class="ao-page-desc">{{ activeStep.description }}</p>
+        </div>
+        <div class="ao-autosave">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+            <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"
+              stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M17 21v-8H7v8M7 3v5h8"
+              stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Auto-save
+        </div>
+      </div>
+      <!-- Progress bar -->
+      <div class="ao-progress-track">
+        <div class="ao-progress-fill" [style.width.%]="progressPercent"></div>
+      </div>
+    </div>
+
+    <!-- Scrollable content -->
+    <div class="ao-content">
+      @if (currentStep === 1) {
+        <app-advertiser-info-step [form]="advertiserForm" />
+      } @else if (currentStep === 2) {
+        <app-business-verification-step (documentsChanged)="onDocumentsChanged($event)" />
+      } @else if (currentStep === 3) {
+        <app-verification-review-step
+          [form]="advertiserForm"
+          [documents]="uploadedDocs"
+          (editInfoRequested)="editInfo()" />
+      } @else if (currentStep === 4) {
+        <app-verification-status-step [form]="advertiserForm" />
+      }
+    </div>
+
+    <!-- Sticky footer (hidden on final status step) -->
+    @if (currentStep !== 4) {
+    <footer class="ao-footer">
+
+      <!-- Step 3: "Edit Information" replaces "Back" -->
+      @if (isEditInfoStep) {
+        <button class="ao-back-btn" type="button" (click)="editInfo()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+            <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Edit Information
+        </button>
+      } @else {
+        <button
+          class="ao-back-btn"
+          type="button"
+          [disabled]="currentStep === 1"
+          (click)="back()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+            <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Back
+        </button>
+      }
+
+      <div class="ao-footer-right">
+        <button class="ao-draft-btn" type="button" (click)="saveDraft()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+            <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"
+              stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M17 21v-8H7v8M7 3v5h8"
+              stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Save Draft
+        </button>
+
+        <button class="ao-next-btn" type="button" (click)="next()">
+          @if (isEditInfoStep) {
+            
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+              <path d="M22 2L11 13M22 2L15 22 11 13 2 9l20-7z" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          }
+          {{ nextButtonLabel }}
+          @if (!isEditInfoStep) {
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+              <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          }
+        </button>
+      </div>
+    </footer>
+    }
+
+  </main>
+
+</div>

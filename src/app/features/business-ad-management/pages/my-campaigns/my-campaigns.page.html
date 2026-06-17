@@ -1,0 +1,198 @@
+<div class="mc-page">
+
+  <!-- ── Header ──────────────────────────────────────── -->
+  <div class="mc-header">
+    <div class="mc-header-left">
+      <h1 class="mc-title">My Campaigns</h1>
+      <p class="mc-subtitle">{{ campaigns.length }} total · {{ liveCount }} live</p>
+    </div>
+    <button class="mc-new-btn">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+        <path d="M6.5 2v9M2 6.5h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      New Campaign
+    </button>
+  </div>
+
+  <!-- ── Filters Bar ──────────────────────────────────── -->
+  <div class="mc-filters-bar">
+
+    <!-- Status Tabs -->
+    <div class="mc-tabs">
+      @for (tab of tabs; track tab.id) {
+        <button
+          class="mc-tab"
+          [class.mc-tab--active]="activeTab === tab.id"
+          (click)="setTab(tab.id)">
+          {{ tab.label }} {{ tabCount(tab) }}
+        </button>
+      }
+    </div>
+
+    <!-- Right Controls -->
+    <div class="mc-controls">
+
+      <!-- Placement Dropdown -->
+      <div class="mc-dropdown-wrap">
+        <button class="mc-dropdown-trigger" (click)="showPlacementDropdown = !showPlacementDropdown">
+          {{ selectedPlacement }}
+          <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+            <path d="M2 4l3.5 3.5L9 4" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        @if (showPlacementDropdown) {
+          <div class="mc-dropdown-menu">
+            @for (p of placements; track p) {
+              <button
+                class="mc-dropdown-item"
+                [class.mc-dropdown-item--active]="selectedPlacement === p"
+                (click)="setPlacement(p)">
+                {{ p }}
+              </button>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Search -->
+      <div class="mc-search-box">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <circle cx="6" cy="6" r="4.5" stroke="#94a3b8" stroke-width="1.4"/>
+          <path d="M10 10l2.5 2.5" stroke="#94a3b8" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+        <input
+          type="text"
+          class="mc-search-input"
+          placeholder="Search campaigns..."
+          [(ngModel)]="searchQuery"
+          (ngModelChange)="currentPage = 1" />
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Table ──────────────────────────────────────── -->
+  <div class="mc-table-wrap">
+    <table class="mc-table">
+      <thead>
+        <tr>
+          <th class="mc-th">CAMPAIGN</th>
+          <th class="mc-th">PLACEMENT</th>
+          <th class="mc-th">STATUS</th>
+          <th class="mc-th mc-th--sortable">
+            REACH
+            <svg width="9" height="12" viewBox="0 0 9 12" fill="none">
+              <path d="M4.5 1L2 4.5h5L4.5 1z" fill="#cbd5e1"/>
+              <path d="M4.5 11L2 7.5h5L4.5 11z" fill="#cbd5e1"/>
+            </svg>
+          </th>
+          <th class="mc-th mc-th--sortable">
+            CLICKS
+            <svg width="9" height="12" viewBox="0 0 9 12" fill="none">
+              <path d="M4.5 1L2 4.5h5L4.5 1z" fill="#cbd5e1"/>
+              <path d="M4.5 11L2 7.5h5L4.5 11z" fill="#cbd5e1"/>
+            </svg>
+          </th>
+          <th class="mc-th mc-th--sortable">
+            SPEND
+            <svg width="9" height="12" viewBox="0 0 9 12" fill="none">
+              <path d="M4.5 1L2 4.5h5L4.5 1z" fill="#cbd5e1"/>
+              <path d="M4.5 11L2 7.5h5L4.5 11z" fill="#cbd5e1"/>
+            </svg>
+          </th>
+          <th class="mc-th">DURATION</th>
+          <th class="mc-th mc-th--right">ACTION</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (c of paginatedCampaigns; track c.id) {
+          <tr class="mc-row">
+
+            <!-- Campaign -->
+            <td class="mc-td">
+              <span class="mc-name">{{ c.name }}</span>
+              <span class="mc-objective">{{ c.objective }}</span>
+            </td>
+
+            <!-- Placement -->
+            <td class="mc-td mc-td--muted">{{ c.placement }}</td>
+
+            <!-- Status -->
+            <td class="mc-td">
+              <span class="mc-status {{ statusClass(c.status) }}">{{ c.status }}</span>
+            </td>
+
+            <!-- Reach -->
+            <td class="mc-td mc-td--num">{{ formatNum(c.reach) }}</td>
+
+            <!-- Clicks -->
+            <td class="mc-td mc-td--num">{{ formatNum(c.clicks) }}</td>
+
+            <!-- Spend -->
+            <td class="mc-td">
+              <span class="mc-spend-main">{{ formatUsd(c.spend) }}</span>
+              <span class="mc-spend-cap">of {{ formatUsd(c.totalBudget) }}</span>
+            </td>
+
+            <!-- Duration -->
+            <td class="mc-td">
+              @if (c.startDate) {
+                <div class="mc-duration">
+                  <span>{{ formatDate(c.startDate) }} →</span>
+                  <span>{{ formatDate(c.endDate) }}</span>
+                </div>
+              } @else {
+                <span class="mc-dash">—</span>
+              }
+            </td>
+
+            <!-- Action -->
+            <td class="mc-td mc-td--action">
+              <button class="mc-view-btn" (click)="openDrawer(c)">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M1 7c0 0 2.2-4 6-4s6 4 6 4-2.2 4-6 4-6-4-6-4z"
+                    stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+                  <circle cx="7" cy="7" r="1.8" stroke="currentColor" stroke-width="1.3"/>
+                </svg>
+                View
+              </button>
+            </td>
+
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── Footer ──────────────────────────────────────── -->
+  <div class="mc-footer">
+    <span class="mc-showing">
+      Showing {{ filteredCampaigns.length }} of {{ campaigns.length }} campaigns
+    </span>
+    <div class="mc-pagination">
+      <button class="mc-page-btn" (click)="setPage(currentPage - 1)" [disabled]="currentPage === 1">
+        Prev
+      </button>
+      @for (p of pageNumbers; track p) {
+        <button
+          class="mc-page-btn mc-page-num"
+          [class.mc-page-btn--active]="currentPage === p"
+          (click)="setPage(p)">
+          {{ p }}
+        </button>
+      }
+      <button class="mc-page-btn" (click)="setPage(currentPage + 1)" [disabled]="currentPage === totalPages">
+        Next
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── Campaign Detail Drawer ──────────────────────── -->
+@if (selectedCampaign) {
+  <app-campaign-detail-drawer
+    [campaign]="selectedCampaign"
+    (closed)="closeDrawer()" />
+}

@@ -1,0 +1,151 @@
+<!-- Backdrop -->
+<div class="idd-backdrop" (click)="close()"></div>
+
+<!-- Panel -->
+<div class="idd-panel" role="dialog" aria-modal="true">
+
+  <!-- ── Top header bar ──────────────────────────────────── -->
+  <div class="idd-header-bar">
+    <div class="idd-header-left">
+      <span class="idd-inv-id">{{ invoice.invoiceId }}</span>
+      <span class="idd-status-pill" [class]="statusClass">
+        <span class="idd-dot"></span>{{ invoice.status }}
+      </span>
+    </div>
+    <button class="idd-close-btn" type="button" (click)="close()" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+        <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- ── Scrollable body ─────────────────────────────────── -->
+  <div class="idd-body">
+
+    <!-- Dark invoice card -->
+    <div class="idd-invoice-card">
+      <div class="idd-card-left">
+        <div class="idd-platform-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2L2 7l10 5 10-5-10-5z" fill="#f97316"/>
+            <path d="M2 17l10 5 10-5" stroke="#f97316" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2 12l10 5 10-5" stroke="#f97316" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <p class="idd-platform-name">{{ platform.name }}</p>
+        <p class="idd-platform-detail">{{ platform.email }}</p>
+        <p class="idd-platform-detail">{{ platform.address }}</p>
+        <p class="idd-platform-detail">GSTIN: {{ platform.gstin }}</p>
+      </div>
+      <div class="idd-card-right">
+        <p class="idd-invoice-word">INVOICE</p>
+        <p class="idd-invoice-num">#{{ invoice.invoiceId }}</p>
+        <p class="idd-invoice-date">Issued: {{ invoice.issueDate }}</p>
+        <p class="idd-invoice-date">Due: {{ invoice.dueDate }}</p>
+      </div>
+    </div>
+
+    <!-- BILLED TO / FINANCE CONTACT -->
+    <div class="idd-contact-row">
+      <div class="idd-contact-block">
+        <p class="idd-contact-heading">BILLED TO</p>
+        <p class="idd-contact-name">{{ billedTo.company }}</p>
+        <p class="idd-contact-detail">GSTIN: {{ billedTo.gstin }}</p>
+        <p class="idd-contact-detail">{{ billedTo.address }}</p>
+      </div>
+      <div class="idd-contact-block">
+        <p class="idd-contact-heading">FINANCE CONTACT</p>
+        <p class="idd-contact-name">{{ financeContact.name }}</p>
+        <p class="idd-contact-detail">{{ financeContact.email }}</p>
+        <p class="idd-contact-detail">{{ financeContact.phone }}</p>
+      </div>
+    </div>
+
+    <!-- Billing Period alert -->
+    <div class="idd-period-alert">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="10" stroke="#f97316" stroke-width="1.8"/>
+        <path d="M12 6v6l4 2" stroke="#f97316" stroke-width="1.8"
+          stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Billing Period: {{ invoice.billingPeriod }}
+    </div>
+
+    <!-- Line items table -->
+    <div class="idd-table-wrap">
+      <table class="idd-table">
+        <thead class="idd-thead">
+          <tr>
+            <th class="idd-th idd-th--desc">DESCRIPTION</th>
+            <th class="idd-th idd-th--num">AMOUNT</th>
+            <th class="idd-th idd-th--num">GST 18%</th>
+            <th class="idd-th idd-th--num">TOTAL</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of invoice.lineItems; track item.description) {
+            <tr class="idd-tr">
+              <td class="idd-td idd-td--desc">{{ item.description }}</td>
+              <td class="idd-td idd-td--num">{{ fmt(item.amount) }}</td>
+              <td class="idd-td idd-td--num idd-td--muted">{{ fmt(getLineGst(item.amount)) }}</td>
+              <td class="idd-td idd-td--num">{{ fmt(getLineTotal(item.amount)) }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Summary rows -->
+    <div class="idd-summary">
+      <div class="idd-summary-row">
+        <span class="idd-summary-label">Subtotal</span>
+        <span class="idd-summary-val">{{ fmt(subtotal) }}</span>
+      </div>
+      <div class="idd-summary-row">
+        <span class="idd-summary-label">IGST (18%)</span>
+        <span class="idd-summary-val">{{ fmt(igst) }}</span>
+      </div>
+      <div class="idd-summary-divider"></div>
+      <div class="idd-summary-row idd-summary-row--total">
+        <span class="idd-summary-label idd-summary-label--total">Invoice Total</span>
+        <span class="idd-summary-val idd-summary-val--total">{{ fmt(total) }}</span>
+      </div>
+    </div>
+
+  </div><!-- /idd-body -->
+
+  <!-- ── Footer ─────────────────────────────────────────── -->
+  <div class="idd-footer">
+    <div class="idd-footer-left">
+      <span class="idd-payment-terms">Payment Terms: Net 15 · For queries: billing&#64;admanager.io</span>
+      <span class="idd-status-pill idd-status-pill--footer" [class]="statusClass">
+        <span class="idd-dot"></span>{{ invoice.status }}
+      </span>
+    </div>
+    <div class="idd-footer-btns">
+      <button class="idd-btn idd-btn--primary" type="button">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"
+            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Download PDF
+      </button>
+      <button class="idd-btn idd-btn--outline" type="button">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+          <polyline points="6 9 6 2 18 2 18 9" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"
+            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="6" y="14" width="12" height="8" rx="1" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Print
+      </button>
+      <button class="idd-btn idd-btn--outline" type="button" (click)="close()">Close</button>
+    </div>
+  </div>
+
+</div>

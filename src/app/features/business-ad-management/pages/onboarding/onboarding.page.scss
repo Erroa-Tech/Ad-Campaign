@@ -1,0 +1,351 @@
+/* ── Full-page Layout ──────────────────────────────────── */
+:host {
+  display: block;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.ao-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background: #f8fafc;
+}
+
+/* ══ SIDEBAR ══════════════════════════════════════════════ */
+.ao-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  background: #0f172a;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.ao-sidebar-inner {
+  padding: 28px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+  flex: 1;
+
+  &::-webkit-scrollbar { display: none; }
+}
+
+/* Brand */
+.ao-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ao-brand-icon {
+  width: 36px;
+  height: 36px;
+  background: #f97316;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.ao-brand-name {
+  margin: 0 0 2px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.ao-brand-sub {
+  margin: 0;
+  font-size: 0.72rem;
+  color: #f97316;
+  font-weight: 500;
+}
+
+/* Info */
+.ao-sidebar-info {
+  margin: 0;
+  font-size: 0.78rem;
+  color: #64748b;
+  line-height: 1.55;
+}
+
+.ao-sidebar-divider {
+  height: 1px;
+  background: #1e293b;
+}
+
+/* ── Steps ───────────────────────────────────────────── */
+.ao-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ao-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: background 0.15s;
+  cursor: default;
+
+  &--active {
+    background: rgba(249, 115, 22, 0.1);
+
+    .ao-step-icon-wrap {
+      background: #f97316;
+      color: #ffffff;
+    }
+
+    .ao-step-label { color: #ffffff; }
+    .ao-step-sub   { color: #f97316; }
+  }
+
+  &--completed {
+    .ao-step-icon-wrap {
+      background: #16a34a;
+      color: #ffffff;
+    }
+    .ao-step-label { color: #94a3b8; }
+  }
+}
+
+.ao-step-icon-wrap {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: #1e293b;
+  color: #475569;
+  display: grid;
+  place-items: center;
+  transition: background 0.15s, color 0.15s;
+}
+
+.ao-step-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.ao-step-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #475569;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.15s;
+}
+
+.ao-step-sub {
+  font-size: 0.7rem;
+  color: #334155;
+  font-weight: 400;
+}
+
+/* Footer help text */
+.ao-sidebar-footer-text {
+  padding: 16px 20px;
+  margin: 0;
+  font-size: 0.72rem;
+  color: #334155;
+  border-top: 1px solid #1e293b;
+  line-height: 1.55;
+}
+
+/* ══ MAIN CONTENT ══════════════════════════════════════════ */
+.ao-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Page header */
+.ao-page-header {
+  flex-shrink: 0;
+  padding: 28px 40px 0;
+  background: #ffffff;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.ao-page-header-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 16px;
+}
+
+.ao-page-header-left { display: flex; flex-direction: column; gap: 6px; }
+
+.ao-step-meta {
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #f97316;
+  letter-spacing: 0.12em;
+}
+
+.ao-page-title {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.15;
+}
+
+.ao-page-desc {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+/* Auto-save */
+.ao-autosave {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.76rem;
+  color: #94a3b8;
+  white-space: nowrap;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+/* Progress bar */
+.ao-progress-track {
+  height: 3px;
+  background: #f1f5f9;
+}
+
+.ao-progress-fill {
+  height: 100%;
+  background: #f97316;
+  border-radius: 2px;
+  transition: width 0.35s ease;
+}
+
+/* Scrollable content */
+.ao-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 28px 40px;
+
+  &::-webkit-scrollbar { width: 5px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 4px; }
+}
+
+/* Placeholder for steps 2-4 */
+.ao-step-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 80px 20px;
+  text-align: center;
+
+  p {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #334155;
+  }
+
+  span {
+    font-size: 0.82rem;
+    color: #94a3b8;
+  }
+}
+
+/* ── Footer ──────────────────────────────────────────── */
+.ao-footer {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 40px;
+  background: #ffffff;
+  border-top: 1px solid #f1f5f9;
+  gap: 12px;
+}
+
+.ao-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ao-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: #475569;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+
+  &:hover:not(:disabled) {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.ao-draft-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: #475569;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+
+  &:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+  }
+}
+
+.ao-next-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 22px;
+  background: #f97316;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover { background: #ea580c; }
+}

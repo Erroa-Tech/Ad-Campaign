@@ -1,0 +1,142 @@
+<div class="cc-page">
+
+  <!-- ── Step Wizard Panel ──────────────────────────────── -->
+  <aside class="cc-step-panel">
+
+    <!-- Panel Header -->
+    <div class="cc-panel-header">
+      <span class="cc-panel-label">NEW CAMPAIGN</span>
+      <div class="cc-autosave">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+          <rect x="1" y="1" width="11" height="11" rx="2" stroke="#94a3b8" stroke-width="1.3"/>
+          <path d="M4 1v4h5V1" stroke="#94a3b8" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="3" y="7" width="7" height="4" rx="1" stroke="#94a3b8" stroke-width="1.1"/>
+        </svg>
+        Auto-save on
+      </div>
+    </div>
+
+    <!-- Steps List -->
+    <nav class="cc-step-list">
+      @for (step of steps; track step.number) {
+        <div class="cc-step-item" [class]="'cc-step-' + stepStatus(step.number)">
+          <span class="cc-step-circle">
+            @if (stepStatus(step.number) === 'completed') {
+              <img src="assets/icons/check_Icon.png" alt="Check Icon"/>
+              
+            } @else {
+              {{ step.number }}
+            }
+          </span>
+          <span class="cc-step-label">{{ step.label }}</span>
+        </div>
+      }
+    </nav>
+
+    <!-- Save Draft -->
+    <div class="cc-panel-footer">
+      <button class="cc-save-draft-btn">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+          <rect x="1" y="1" width="11" height="11" rx="2" stroke="#475569" stroke-width="1.3"/>
+          <path d="M4 1v4h5V1" stroke="#475569" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="3" y="7" width="7" height="4" rx="1" stroke="#475569" stroke-width="1.1"/>
+        </svg>
+        Save Draft
+      </button>
+    </div>
+
+  </aside>
+
+  <!-- ── Step Content ───────────────────────────────────── -->
+  <main class="cc-content">
+
+    <!-- Step Header -->
+    <div class="cc-content-header">
+      <span class="cc-step-badge">STEP {{ currentStep }} OF {{ totalSteps }}</span>
+      <h1 class="cc-content-title">{{ activeStep.title }}</h1>
+      <p class="cc-content-sub">{{ activeStep.subtitle }}</p>
+    </div>
+
+    <!-- Step Body -->
+    <div class="cc-step-body">
+
+      @if (currentStep === 1) {
+        <app-cc-campaign-details [form]="detailsGroup" [submitted]="submitted" />
+      }
+
+      @if (currentStep === 2) {
+        <app-cc-creative-upload [form]="creativeGroup" [submitted]="submitted" />
+      }
+
+      @if (currentStep === 3) {
+        <app-cc-placement
+          [form]="placementGroup"
+          [submitted]="submitted"
+          (selectionChange)="onPlacementSelected($event)" />
+      }
+
+      @if (currentStep === 4) {
+        <app-cc-audience [form]="audienceGroup" />
+      }
+
+      @if (currentStep === 5) {
+        <app-cc-budget-duration [form]="budgetGroup" [submitted]="submitted" />
+      }
+
+      @if (currentStep === 6) {
+        <app-cc-review-submit [form]="campaignForm" />
+      }
+
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="cc-nav-row">
+      <button
+        class="cc-back-btn"
+        (click)="goBack()"
+        [disabled]="currentStep === 1">
+        Back
+      </button>
+      <button
+        class="cc-continue-btn"
+        [class.cc-continue-btn--submit]="currentStep === totalSteps"
+        (click)="goNext()">
+        @if (currentStep < totalSteps) {
+          Continue
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        } @else {
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+            <path d="M22 2L11 13" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M22 2L15 22 11 13 2 9l20-7z" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Submit for Review
+        }
+      </button>
+    </div>
+
+  </main>
+
+  <!-- ── Live Preview Panel ─────────────────────────────── -->
+  <aside class="cc-preview-panel">
+
+    <div class="cc-preview-header">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+        <rect x="2" y="3" width="20" height="14" rx="2"
+          stroke="#94a3b8" stroke-width="1.8"/>
+        <path d="M8 21h8M12 17v4"
+          stroke="#94a3b8" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      <span class="cc-preview-label">LIVE PREVIEW</span>
+    </div>
+
+    <app-cc-placement-preview
+      [placementId]="currentStep === 3 ? selectedPlacementId : ''" />
+
+  </aside>
+
+</div>

@@ -1,0 +1,154 @@
+<div class="pp-wrap">
+
+  <!-- Phone frame -->
+  <div class="pp-phone">
+    <div class="pp-speaker"></div>
+    <div class="pp-screen">
+
+      <!-- ── Empty state ─────────────────────────────── -->
+      @if (!placementId) {
+        <div class="pp-empty">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="3" width="18" height="18" rx="3" stroke="#d1d5db" stroke-width="1.8"/>
+            <circle cx="8.5" cy="8.5" r="1.5" stroke="#d1d5db" stroke-width="1.5"/>
+            <path d="M21 15l-5-5L5 21" stroke="#d1d5db" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p class="pp-empty-text">Select a placement to<br>preview your ad</p>
+        </div>
+      }
+
+      <!-- ── Status Feed Ad ──────────────────────────── -->
+      @if (placementId === 'status-feed') {
+        <div class="pp-sf">
+
+          <!-- App bar -->
+          <div class="pp-sf-bar">
+            <span class="pp-sf-logo">S</span>
+            <span class="pp-sf-app-name">StatusCall</span>
+            <svg width="10" height="10" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="4"  r="1.5" fill="#94a3b8"/>
+              <circle cx="10" cy="10" r="1.5" fill="#94a3b8"/>
+              <circle cx="10" cy="16" r="1.5" fill="#94a3b8"/>
+            </svg>
+          </div>
+
+          <!-- Status circles -->
+          <div class="pp-sf-stories">
+            <div class="pp-sf-story pp-sf-story--you"></div>
+            <div class="pp-sf-story pp-sf-story--grey"></div>
+            <div class="pp-sf-story pp-sf-story--grey"></div>
+            <div class="pp-sf-story pp-sf-story--grey"></div>
+          </div>
+
+          <!-- Ad card -->
+          <div class="pp-sf-ad">
+            <div class="pp-sf-ad-meta">
+              <span class="pp-sf-ad-badge">AD</span>
+              <span class="pp-sf-ad-sponsor">Sponsored · Your Business</span>
+            </div>
+            <div class="pp-sf-ad-image">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="3" width="18" height="18" rx="3"
+                  stroke="rgba(255,255,255,0.6)" stroke-width="1.8"/>
+                <circle cx="8.5" cy="8.5" r="1.5"
+                  stroke="rgba(255,255,255,0.6)" stroke-width="1.5"/>
+                <path d="M21 15l-5-5L5 21"
+                  stroke="rgba(255,255,255,0.6)" stroke-width="1.8"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="pp-sf-ad-body">
+              <p class="pp-sf-ad-title">Summer sale 2026</p>
+              <p class="pp-sf-ad-sub">My promotion</p>
+              <button class="pp-sf-ad-cta">Learn More</button>
+            </div>
+          </div>
+
+          <!-- Feed rows -->
+          <div class="pp-sf-feed-row">
+            <div class="pp-sf-feed-avatar"></div>
+            <div class="pp-sf-feed-lines">
+              <div class="pp-sf-feed-line pp-sf-feed-line--wide"></div>
+              <div class="pp-sf-feed-line"></div>
+            </div>
+          </div>
+
+        </div>
+      }
+
+      <!-- ── Full Screen Ad ──────────────────────────── -->
+      @if (placementId === 'full-screen') {
+        <div class="pp-fs">
+          <div class="pp-fs-ad">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="3" width="18" height="18" rx="3"
+                stroke="rgba(255,255,255,0.5)" stroke-width="1.8"/>
+              <circle cx="8.5" cy="8.5" r="1.5"
+                stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+              <path d="M21 15l-5-5L5 21"
+                stroke="rgba(255,255,255,0.5)" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <p class="pp-fs-title">Summer sale 2026</p>
+            <p class="pp-fs-sub">Your Business</p>
+            <button class="pp-fs-cta">Learn More</button>
+          </div>
+          <div class="pp-fs-skip">Skip Ad</div>
+        </div>
+      }
+
+      <!-- ── Call Screen Ad ──────────────────────────── -->
+      @if (placementId === 'call-screen') {
+        <div class="pp-cs">
+          <!-- Incoming call UI -->
+          <div class="pp-cs-call">
+            <div class="pp-cs-avatar">AR</div>
+            <p class="pp-cs-name">Incoming Call</p>
+            <p class="pp-cs-sub">Alex Reyes</p>
+          </div>
+          <!-- Ad overlay at bottom -->
+          <div class="pp-cs-ad">
+            <span class="pp-cs-ad-badge">AD</span>
+            <div class="pp-cs-ad-content">
+              <p class="pp-cs-ad-title">Summer sale 2026</p>
+              <p class="pp-cs-ad-sub">Your Business</p>
+            </div>
+            <button class="pp-cs-ad-cta">View</button>
+          </div>
+        </div>
+      }
+
+      <!-- ── Banner Ad ───────────────────────────────── -->
+      @if (placementId === 'banner') {
+        <div class="pp-bn">
+          <!-- App content placeholder -->
+          <div class="pp-bn-bar">
+            <span class="pp-bn-logo">S</span>
+            <span class="pp-bn-app">StatusCall</span>
+          </div>
+          <div class="pp-bn-content">
+            <div class="pp-bn-line pp-bn-line--wide"></div>
+            <div class="pp-bn-line"></div>
+            <div class="pp-bn-line pp-bn-line--wide"></div>
+            <div class="pp-bn-line pp-bn-line--mid"></div>
+          </div>
+          <!-- Banner ad at top -->
+          <div class="pp-bn-ad">
+            <span class="pp-bn-ad-badge">AD</span>
+            <span class="pp-bn-ad-text">Summer sale 2026 · Your Business</span>
+          </div>
+        </div>
+      }
+
+    </div>
+  </div>
+
+  <!-- Caption -->
+  @if (placementId) {
+    <p class="pp-caption">{{ caption }}</p>
+  } @else {
+    <p class="pp-caption pp-caption--empty">Select a placement to see preview</p>
+  }
+
+</div>

@@ -1,0 +1,239 @@
+<div class="vs-layout">
+
+  <!-- ── LEFT: Tab panel ────────────────────────────────── -->
+  <div class="vs-main">
+
+    <!-- Tab Bar -->
+    <div class="vs-tabs" role="tablist">
+
+      <button class="vs-tab"
+        [class.vs-tab--active-review]="activeTab === 'under-review'"
+        (click)="switchTab('under-review')" role="tab">
+        <svg class="vs-tab-icon" width="15" height="15" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Under Review
+      </button>
+
+      <button class="vs-tab"
+        [class.vs-tab--active-approved]="activeTab === 'approved'"
+        (click)="switchTab('approved')" role="tab">
+        <svg class="vs-tab-icon" width="15" height="15" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M8 12l3 3 5-5" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Approved
+      </button>
+
+      <button class="vs-tab"
+        [class.vs-tab--active-rejected]="activeTab === 'rejected'"
+        (click)="switchTab('rejected')" role="tab">
+        <svg class="vs-tab-icon" width="15" height="15" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M8 8l8 8M16 8l-8 8" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round"/>
+        </svg>
+        Rejected
+      </button>
+
+    </div>
+
+    <!-- ── UNDER REVIEW ── -->
+    @if (activeTab === 'under-review') {
+      <div class="vs-card">
+
+        <div class="vs-status-header">
+          <div class="vs-status-icon-wrap vs-status-icon-wrap--orange">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="#f97316" stroke-width="1.8"/>
+              <path d="M12 6v6l4 2" stroke="#f97316" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="vs-status-title">Verification under review</h3>
+            <p class="vs-status-sub">Your advertiser profile is in the StatusCall compliance queue.</p>
+          </div>
+        </div>
+
+        <div class="vs-divider"></div>
+
+        <p class="vs-status-desc">
+          Compliance review typically takes <strong>24–48 business hours</strong>. You can
+          continue exploring the dashboard while campaign creation remains subject to
+          verification approval.
+        </p>
+
+        <ul class="vs-checklist" role="list">
+          @for (item of checklist; track item.id) {
+            <li class="vs-checklist-item">
+              @if (item.status === 'done') {
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" stroke="#16a34a" stroke-width="1.6"/>
+                  <path d="M8 12l3 3 5-5" stroke="#16a34a" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              } @else {
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="10" stroke="#cbd5e1" stroke-width="1.6"/>
+                  <path d="M12 7v5l3 1.5" stroke="#cbd5e1" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              }
+              <span class="vs-checklist-label" [class.vs-checklist-label--done]="item.status === 'done'"
+                [class.vs-checklist-label--pending]="item.status === 'pending'">
+                {{ item.label }}
+              </span>
+            </li>
+          }
+        </ul>
+
+      </div>
+    }
+
+    <!-- ── APPROVED ── -->
+    @if (activeTab === 'approved') {
+      <div class="vs-card">
+
+        <div class="vs-status-header">
+          <div class="vs-status-icon-wrap vs-status-icon-wrap--green">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="#16a34a" stroke-width="1.8"/>
+              <path d="M8 12l3 3 5-5" stroke="#16a34a" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="vs-status-title">Verification complete</h3>
+            <p class="vs-status-sub">Access granted. Your advertiser account is approved for campaign creation.</p>
+          </div>
+        </div>
+
+        <div class="vs-divider"></div>
+
+        <!-- Access granted alert -->
+        <div class="vs-alert vs-alert--green">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" stroke="#16a34a" stroke-width="1.8"/>
+            <path d="M8 12l3 3 5-5" stroke="#16a34a" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div>
+            <p class="vs-alert-title">Access Granted</p>
+            <p class="vs-alert-desc">You can create campaigns, manage billing, and submit ads for creative review.</p>
+          </div>
+        </div>
+
+        <div>
+          <button class="vs-cta-btn vs-cta-btn--orange" type="button">
+            Continue to Dashboard
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+              <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    }
+
+    <!-- ── REJECTED ── -->
+    @if (activeTab === 'rejected') {
+      <div class="vs-card">
+
+        <div class="vs-status-header">
+          <div class="vs-status-icon-wrap vs-status-icon-wrap--red">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="#dc2626" stroke-width="1.8"/>
+              <path d="M8 8l8 8M16 8l-8 8" stroke="#dc2626" stroke-width="2"
+                stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="vs-status-title">Verification rejected</h3>
+            <p class="vs-status-sub">Some submitted information needs changes before approval.</p>
+          </div>
+        </div>
+
+        <div class="vs-divider"></div>
+
+        <!-- Rejection reason card -->
+        <div class="vs-alert vs-alert--red">
+          <div>
+            <p class="vs-alert-title vs-alert-title--red">Rejection reason</p>
+            <p class="vs-alert-desc vs-alert-desc--red">
+              Tax ID / GST certificate does not clearly show the registered advertiser name.
+            </p>
+          </div>
+        </div>
+
+        <!-- Required changes card -->
+        <div class="vs-changes-card">
+          <p class="vs-changes-title">Required changes</p>
+          <ul class="vs-changes-list">
+            <li>Upload a complete tax certificate showing legal name and registration number.</li>
+            <li>Confirm that advertiser name matches registration documents.</li>
+            <li>Resubmit for another compliance review.</li>
+          </ul>
+        </div>
+
+        <div>
+          <button class="vs-cta-btn vs-cta-btn--orange" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+              <path d="M23 4v6h-6M1 20v-6h6"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Edit &amp; Resubmit
+          </button>
+        </div>
+
+      </div>
+    }
+
+  </div><!-- /vs-main -->
+
+  <!-- ── RIGHT: Advertiser summary ──────────────────────── -->
+  <aside class="vs-sidebar">
+    <div class="vs-adv-card">
+      <p class="vs-adv-label">ADVERTISER</p>
+      <h3 class="vs-adv-name">{{ val('advertiserName') }}</h3>
+      <div class="vs-adv-rows">
+        <div class="vs-adv-row">
+          <span class="vs-adv-key">Email</span>
+          <span class="vs-adv-val">{{ val('businessEmail') }}</span>
+        </div>
+        <div class="vs-adv-row">
+          <span class="vs-adv-key">Country</span>
+          <span class="vs-adv-val">{{ val('country') }}</span>
+        </div>
+        <div class="vs-adv-row">
+          <span class="vs-adv-key">Tax ID</span>
+          <span class="vs-adv-val vs-adv-val--mono">{{ val('taxId') }}</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+</div><!-- /vs-layout -->
+
+<!-- ── Toast notification ──────────────────────────────── -->
+@if (showToast) {
+  <div class="vs-toast" role="status" aria-live="polite">
+    <div class="vs-toast-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="10" fill="#0f172a"/>
+        <path d="M8 12l3 3 5-5" stroke="white" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="vs-toast-body">
+      <p class="vs-toast-title">Submitted for verification</p>
+      <p class="vs-toast-sub">Compliance review is now in progress.</p>
+    </div>
+  </div>
+}

@@ -1,0 +1,165 @@
+<div class="bi-container">
+
+  <!-- ── Stat bar ─────────────────────────────────────────── -->
+  <div class="bi-stats-bar">
+
+    <div class="bi-stat">
+      <p class="bi-stat-count">{{ totalInvoices }}</p>
+      <p class="bi-stat-label">Total Invoices</p>
+    </div>
+
+    <div class="bi-stat-divider"></div>
+
+    <div class="bi-stat">
+      <p class="bi-stat-count bi-stat-count--green">{{ totalPaid }}</p>
+      <p class="bi-stat-label">Paid</p>
+    </div>
+
+    <div class="bi-stat-divider"></div>
+
+    <div class="bi-stat">
+      <p class="bi-stat-count bi-stat-count--red">{{ totalOutstanding }}</p>
+      <p class="bi-stat-label">Outstanding</p>
+    </div>
+
+    <div class="bi-stat-divider"></div>
+
+    <div class="bi-stat">
+      <p class="bi-stat-count">{{ formatTotalValue(totalValue) }}</p>
+      <p class="bi-stat-label">Total Value</p>
+    </div>
+
+  </div>
+
+  <!-- ── Filter bar ───────────────────────────────────────── -->
+  <div class="bi-filter-bar">
+
+    <div class="bi-filter-left">
+      <!-- Filter icon -->
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"
+          stroke="#64748b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <!-- Status dropdown -->
+      <div class="bi-dropdown">
+        <button class="bi-dropdown-trigger" type="button" (click)="toggleStatusDrop($event)">
+          {{ activeStatusLabel }}
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+            [class.bi-chevron--up]="showStatusDrop">
+            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        @if (showStatusDrop) {
+          <div class="bi-dropdown-menu">
+            @for (opt of statusOptions; track opt.value) {
+              <button class="bi-dropdown-opt"
+                [class.bi-dropdown-opt--active]="statusFilter === opt.value"
+                (click)="setStatusFilter(opt.value, $event)">
+                {{ opt.label }}
+              </button>
+            }
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="bi-filter-right">
+      <!-- Search -->
+      <div class="bi-search">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+          <circle cx="11" cy="11" r="8" stroke="#94a3b8" stroke-width="1.8"/>
+          <path d="M21 21l-4.35-4.35" stroke="#94a3b8" stroke-width="1.8"
+            stroke-linecap="round"/>
+        </svg>
+        <input class="bi-search-input" type="text" placeholder="Search invoices..."
+          [(ngModel)]="searchQuery" (ngModelChange)="onSearch()" />
+      </div>
+
+      <!-- Export button -->
+      <button class="bi-export-btn" type="button">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"
+            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Export
+      </button>
+    </div>
+
+  </div>
+
+  <!-- ── Table ────────────────────────────────────────────── -->
+  <div class="bi-table-wrap">
+    <table class="bi-table">
+      <thead class="bi-thead">
+        <tr>
+          <th class="bi-th">INVOICE ID</th>
+          <th class="bi-th">BILLING PERIOD</th>
+          <th class="bi-th">ISSUE DATE</th>
+          <th class="bi-th">DUE DATE</th>
+          <th class="bi-th bi-th--right">SUBTOTAL</th>
+          <th class="bi-th bi-th--right">GST</th>
+          <th class="bi-th bi-th--right">TOTAL</th>
+          <th class="bi-th">STATUS</th>
+          <th class="bi-th"></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (inv of filtered; track inv.id) {
+          <tr class="bi-tr">
+
+            <td class="bi-td bi-td--id">{{ inv.invoiceId }}</td>
+
+            <td class="bi-td bi-td--period">{{ inv.billingPeriod }}</td>
+
+            <td class="bi-td bi-td--muted">{{ inv.issueDate }}</td>
+
+            <td class="bi-td bi-td--muted">{{ inv.dueDate }}</td>
+
+            <td class="bi-td bi-td--right">{{ formatSubtotal(inv.subtotal) }}</td>
+
+            <td class="bi-td bi-td--right bi-td--muted">{{ formatUsd(getGst(inv)) }}</td>
+
+            <td class="bi-td bi-td--right bi-td--total">{{ formatUsd(getTotal(inv)) }}</td>
+
+            <td class="bi-td">
+              <span class="bi-status-badge" [class]="statusClass(inv.status)">
+                <span class="bi-badge-dot"></span>
+                {{ inv.status }}
+              </span>
+            </td>
+
+            <td class="bi-td bi-td--actions">
+              <button class="bi-view-btn" type="button" (click)="openDetail(inv)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
+                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/>
+                </svg>
+                View
+              </button>
+              <button class="bi-dl-btn" type="button" aria-label="Download invoice">
+                <img src="assets/icons/download_Icon.png" alt="Download"/>  
+              </button>
+            </td>
+
+          </tr>
+        }
+
+        @if (filtered.length === 0) {
+          <tr>
+            <td class="bi-td bi-empty" colspan="9">No invoices match your filters.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+@if (selectedInvoice) {
+  <app-invoice-detail-drawer
+    [invoice]="selectedInvoice"
+    (closed)="closeDetail()" />
+}

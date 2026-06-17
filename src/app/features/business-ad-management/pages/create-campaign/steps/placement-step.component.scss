@@ -1,0 +1,145 @@
+.ps-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Options List ─────────────────────────────── */
+.ps-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+/* ── Individual Option ────────────────────────── */
+.ps-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 22px 18px;
+  border-bottom: 1px solid #f1f5f9;
+  cursor: pointer;
+  transition: background 0.15s;
+  position: relative;
+
+  &:last-child { border-bottom: none; }
+
+  &:hover:not(.ps-option--selected) { background: #fafbfc; }
+
+  &.ps-option--selected {
+    background: #fff7ed;
+    outline: 1.5px solid #f97316;
+    outline-offset: -1px;
+    border-bottom-color: transparent;
+  }
+}
+
+/* ── Radio ────────────────────────────────────── */
+.ps-radio {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid #d1d5db;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: border-color 0.15s;
+
+  &.ps-radio--on { border-color: #f97316; }
+}
+
+.ps-radio-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #f97316;
+}
+
+/* ── Option Body ──────────────────────────────── */
+.ps-option-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* Title + checkmark row */
+.ps-title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ps-option-name {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.ps-check-icon {
+  flex-shrink: 0;
+}
+
+.ps-option-desc {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+/* ── Info Chips ───────────────────────────────── */
+.ps-chips {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.ps-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px 10px;
+  border: 1px solid #e9edf5;
+  border-radius: 8px;
+  background: #f8fafc;
+  transition: border-color 0.15s;
+
+  &.ps-chip--on {
+    border-color: #fed7aa;
+    background: #fff7ed;
+
+    .ps-chip-value { color: #f97316; }
+  }
+}
+
+.ps-chip-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #94a3b8;
+  letter-spacing: 0.08em;
+}
+
+.ps-chip-value {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #334155;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+
+.ps-error-msg {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 12px 0 0;
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: #ef4444;
+}

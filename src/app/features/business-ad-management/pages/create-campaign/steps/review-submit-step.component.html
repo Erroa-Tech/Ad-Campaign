@@ -1,0 +1,20 @@
+<div class="rs-card">
+
+  <!-- Summary table -->
+  <div class="rs-table">
+    @for (row of reviewRows; track row.key; let last = $last) {
+      <div class="rs-row" [class.rs-row--last]="last">
+        <span class="rs-key">{{ row.key }}</span>
+        <span class="rs-value">{{ row.value }}</span>
+      </div>
+    }
+  </div>
+
+  <!-- Review timeline notice -->
+  <div class="rs-notice">
+    <strong class="rs-notice-bold">Review timeline:</strong>
+    Your campaign will be reviewed within 24–48 business hours.
+    You will receive an email when it is approved or if changes are needed.
+  </div>
+
+</div>

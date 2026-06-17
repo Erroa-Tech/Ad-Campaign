@@ -1,0 +1,69 @@
+<div class="ps-wrap" [formGroup]="form">
+
+  <div class="ps-options-list">
+
+    @for (placement of placements; track placement.id) {
+
+      <div
+        class="ps-option"
+        [class.ps-option--selected]="selectedId === placement.id"
+        (click)="select(placement.id)">
+
+        <!-- Radio Indicator -->
+        <span class="ps-radio" [class.ps-radio--on]="selectedId === placement.id">
+          @if (selectedId === placement.id) {
+            <span class="ps-radio-dot"></span>
+          }
+        </span>
+
+        <!-- Option Body -->
+        <div class="ps-option-body">
+
+          <!-- Title row -->
+          <div class="ps-title-row">
+            <p class="ps-option-name">{{ placement.name }}</p>
+            @if (selectedId === placement.id) {
+              <svg class="ps-check-icon" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M2.5 7l3 3 6-6" stroke="#f97316" stroke-width="1.8"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            }
+          </div>
+
+          <p class="ps-option-desc">{{ placement.description }}</p>
+
+          <!-- Info Chips -->
+          <div class="ps-chips">
+            <div class="ps-chip" [class.ps-chip--on]="selectedId === placement.id">
+              <span class="ps-chip-label">DIMENSIONS</span>
+              <span class="ps-chip-value">{{ placement.dimensions }}</span>
+            </div>
+            <div class="ps-chip" [class.ps-chip--on]="selectedId === placement.id">
+              <span class="ps-chip-label">FORMAT</span>
+              <span class="ps-chip-value">{{ placement.format }}</span>
+            </div>
+            <div class="ps-chip" [class.ps-chip--on]="selectedId === placement.id">
+              <span class="ps-chip-label">EST. CPM</span>
+              <span class="ps-chip-value">{{ placement.cpmRange }}</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+
+  @if (isPlacementInvalid) {
+    <p class="ps-error-msg">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" style="flex-shrink:0">
+        <circle cx="12" cy="12" r="10" stroke="#ef4444" stroke-width="1.8"/>
+        <path d="M12 8v4M12 16h.01" stroke="#ef4444" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      Please select a placement before continuing.
+    </p>
+  }
+
+</div>

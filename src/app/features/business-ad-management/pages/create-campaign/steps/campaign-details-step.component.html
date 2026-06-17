@@ -1,0 +1,133 @@
+<div class="cds-form-card" [formGroup]="form">
+
+  <!-- Campaign Name -->
+  <div class="cds-field cds-field--full">
+    <label class="cds-label" for="campaignName">
+      CAMPAIGN NAME
+      <span class="cds-required">*</span>
+    </label>
+    <input
+      id="campaignName"
+      class="cds-input"
+      [class.cds-input--error]="isInvalid('campaignName')"
+      type="text"
+      formControlName="campaignName"
+      placeholder="e.g. Summer Sale 2024"
+      autocomplete="off" />
+    @if (isInvalid('campaignName')) {
+      <span class="cds-error-msg">Campaign name is required.</span>
+    }
+  </div>
+
+  <!-- Objective + Category row -->
+  <div class="cds-row">
+
+    <!-- Objective dropdown -->
+    <div class="cds-field cds-field--half">
+      <span class="cds-label">OBJECTIVE <span class="cds-required">*</span></span>
+      <div
+        class="cds-dropdown"
+        [class.cds-dropdown--open]="objectiveOpen"
+        [class.cds-dropdown--error]="isInvalid('objective')">
+        <button
+          type="button"
+          class="cds-dropdown-trigger"
+          (click)="toggleObjective($event)">
+          <span [class.cds-dropdown-placeholder]="!form.get('objective')?.value">
+            {{ form.get('objective')?.value || 'Select objective' }}
+          </span>
+          <svg class="cds-chevron" [class.cds-chevron--up]="objectiveOpen"
+            width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        @if (objectiveOpen) {
+          <div class="cds-dropdown-menu" (click)="$event.stopPropagation()">
+            @for (opt of objective; track opt) {
+              <button
+                type="button"
+                class="cds-dropdown-option"
+                [class.cds-dropdown-option--selected]="form.get('objective')?.value === opt"
+                (click)="selectObjective(opt, $event)">
+                {{ opt }}
+                @if (form.get('objective')?.value === opt) {
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M2 6l3 3 5-5" stroke="#f97316" stroke-width="1.8"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                }
+              </button>
+            }
+          </div>
+        }
+      </div>
+      @if (isInvalid('objective')) {
+        <span class="cds-error-msg">Objective is required.</span>
+      }
+    </div>
+
+    <!-- Category dropdown -->
+    <div class="cds-field cds-field--half">
+      <span class="cds-label">CATEGORY <span class="cds-required">*</span></span>
+      <div
+        class="cds-dropdown"
+        [class.cds-dropdown--open]="categoryOpen"
+        [class.cds-dropdown--error]="isInvalid('category')">
+        <button
+          type="button"
+          class="cds-dropdown-trigger"
+          (click)="toggleCategory($event)">
+          <span [class.cds-dropdown-placeholder]="!form.get('category')?.value">
+            {{ form.get('category')?.value || 'Select category' }}
+          </span>
+          <svg class="cds-chevron" [class.cds-chevron--up]="categoryOpen"
+            width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.6"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        @if (categoryOpen) {
+          <div class="cds-dropdown-menu" (click)="$event.stopPropagation()">
+            @for (opt of category; track opt) {
+              <button
+                type="button"
+                class="cds-dropdown-option"
+                [class.cds-dropdown-option--selected]="form.get('category')?.value === opt"
+                (click)="selectCategory(opt, $event)">
+                {{ opt }}
+                @if (form.get('category')?.value === opt) {
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M2 6l3 3 5-5" stroke="#f97316" stroke-width="1.8"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                }
+              </button>
+            }
+          </div>
+        }
+      </div>
+      @if (isInvalid('category')) {
+        <span class="cds-error-msg">Category is required.</span>
+      }
+    </div>
+
+  </div>
+
+  <!-- Description -->
+  <div class="cds-field cds-field--full">
+    <label class="cds-label" for="description">DESCRIPTION</label>
+    <div class="cds-textarea-wrap">
+      <textarea
+        id="description"
+        class="cds-textarea"
+        formControlName="description"
+        [maxlength]="maxDescription"
+        placeholder="Briefly describe the purpose of this campaign..."
+        rows="5">
+      </textarea>
+      <span class="cds-char-count">{{ descriptionLength }}/{{ maxDescription }}</span>
+    </div>
+  </div>
+
+</div>
