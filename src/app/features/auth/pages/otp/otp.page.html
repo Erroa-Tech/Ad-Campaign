@@ -1,0 +1,89 @@
+<div class="otp-page">
+
+  <!-- ── Left: OTP form ───────────────────────────────────── -->
+  <section class="otp-panel">
+    <div class="otp-card">
+
+      <!-- Logo -->
+      <div class="logo">
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="44" height="44" rx="11" fill="#f97316"/>
+          <g stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 10 L17.5 17.5"/>
+            <path d="M10 10 L10 16 M10 10 L16 10"/>
+            <path d="M34 10 L26.5 17.5"/>
+            <path d="M34 10 L34 16 M34 10 L28 10"/>
+            <path d="M10 34 L17.5 26.5"/>
+            <path d="M10 34 L10 28 M10 34 L16 34"/>
+            <path d="M34 34 L26.5 26.5"/>
+            <path d="M34 34 L34 28 M34 34 L28 34"/>
+          </g>
+        </svg>
+      </div>
+
+      <h1 class="card-title">Enter OTP Code</h1>
+      <p class="card-subtitle">
+        We've sent a 6-digit code to<br>
+        <span class="email-highlight">{{ email || 'your email' }}</span>
+      </p>
+
+      <!-- OTP form -->
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+
+        <div class="otp-inputs" [class.otp-inputs--error]="submitted() && form.invalid" (paste)="onPaste($event)">
+          @for (key of digits; track key; let i = $index) {
+            <input
+              #digitInput
+              type="text"
+              inputmode="numeric"
+              maxlength="1"
+              class="otp-digit"
+              [formControlName]="key"
+              [attr.aria-label]="'Digit ' + (i + 1)"
+              (input)="onDigitInput(i, $event)"
+              (keydown)="onDigitKeydown(i, $event)"
+            />
+          }
+        </div>
+
+        @if (submitted() && form.invalid) {
+          <span class="field-error">Please enter all 6 digits</span>
+        }
+
+        <button type="submit" class="btn-primary" [disabled]="isLoading()">
+          @if (isLoading()) {
+            <span class="spinner" aria-hidden="true"></span>
+            Verifying…
+          } @else {
+            Verify OTP
+          }
+        </button>
+
+      </form>
+
+      <!-- Resend -->
+      <p class="resend-text">
+        Didn't receive the code?&nbsp;
+        @if (resendCooldown() > 0) {
+          <span class="resend-countdown">Resend in {{ resendCooldown() }}s</span>
+        } @else {
+          <button type="button" class="resend-btn" (click)="resendOtp()">Resend OTP</button>
+        }
+      </p>
+
+      <p class="back-link">
+        <a routerLink="/auth/forgot-password">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M19 12H5M12 5l-7 7 7 7"/>
+          </svg>
+          Back to forgot password
+        </a>
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ── Right: Image panel ───────────────────────────────── -->
+  <img class="promo-image" src="assets/images/sign_Image.png" alt="" aria-hidden="true" />
+
+</div>

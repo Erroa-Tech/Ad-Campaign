@@ -1,0 +1,319 @@
+// ── Layout ────────────────────────────────────────────────────
+.login-page {
+  display: flex;
+  min-height: 100vh;
+  background: #fff;
+}
+
+// ── Left panel ────────────────────────────────────────────────
+.login-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 48%;
+  padding: 40px 24px;
+  background: #fff;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 44px 40px;
+  box-shadow: var(--shadow-lg);
+}
+
+// ── Logo ──────────────────────────────────────────────────────
+.logo {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 24px;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// ── Headings ──────────────────────────────────────────────────
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text);
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.card-subtitle {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+// ── Social buttons ────────────────────────────────────────────
+.social-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.social-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: #fff;
+  cursor: pointer;
+  transition: border-color var(--transition), box-shadow var(--transition);
+
+  &:hover {
+    border-color: #cbd5e1;
+    box-shadow: var(--shadow-sm);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+.social-icon {
+  width: 22px;
+  height: 22px;
+}
+
+// ── OR divider ────────────────────────────────────────────────
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  color: var(--color-subtle);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--color-border);
+  }
+}
+
+// ── Form fields ───────────────────────────────────────────────
+.field {
+  margin-bottom: 18px;
+
+  label {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: 6px;
+  }
+
+  &--error {
+    .input-wrapper {
+      border-color: #ef4444;
+    }
+  }
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0 14px;
+  height: 50px;
+  background: #fff;
+  transition: border-color var(--transition);
+
+  &:focus-within {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.12);
+  }
+
+  input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    background: transparent;
+    min-width: 0;
+
+    &::placeholder {
+      color: var(--color-subtle);
+    }
+  }
+}
+
+.input-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  color: var(--color-subtle);
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.toggle-pwd {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  color: var(--color-subtle);
+  border-radius: 4px;
+  transition: color var(--transition);
+
+  &:hover { color: var(--color-muted); }
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.field-error {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.75rem;
+  color: #ef4444;
+}
+
+// ── Form options row ──────────────────────────────────────────
+.form-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.remember-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8125rem;
+  color: var(--color-text);
+  cursor: pointer;
+
+  input[type='checkbox'] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+  }
+}
+
+.forgot-link {
+  font-size: 0.8125rem;
+  color: var(--color-text);
+  text-decoration: none;
+
+  &:hover { text-decoration: underline; }
+}
+
+// ── Submit button ─────────────────────────────────────────────
+.btn-primary {
+  width: 100%;
+  height: 50px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background var(--transition), box-shadow var(--transition);
+  margin-bottom: 24px;
+
+  &:hover:not(:disabled) {
+    background: var(--color-primary-dk);
+    box-shadow: 0 4px 14px rgba(249, 115, 22, 0.4);
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// ── Signup link ───────────────────────────────────────────────
+.signup-text {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--color-text);
+
+  a {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
+  }
+}
+
+// ── Right image ───────────────────────────────────────────────
+.promo-image {
+  flex: 1;
+  display: block;
+  height: calc(100vh - 24px);
+  object-fit: cover;
+  object-position: center;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  margin: 12px;
+  border-radius: 20px;
+}
+
+// ── Responsive ────────────────────────────────────────────────
+@media (max-width: 768px) {
+  .login-page {
+    flex-direction: column;
+  }
+
+  .login-panel {
+    flex: none;
+    padding: 32px 16px;
+  }
+
+  .login-card {
+    padding: 32px 24px;
+  }
+
+  .promo-image {
+    display: none;
+  }
+}

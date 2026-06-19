@@ -1,0 +1,238 @@
+// ── Layout ────────────────────────────────────────────────────
+.otp-page {
+  display: flex;
+  min-height: 100vh;
+  background: #fff;
+}
+
+// ── Left panel ────────────────────────────────────────────────
+.otp-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 48%;
+  padding: 40px 24px;
+  background: #fff;
+}
+
+.otp-card {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 44px 40px;
+  box-shadow: var(--shadow-lg);
+}
+
+// ── Logo ──────────────────────────────────────────────────────
+.logo {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 24px;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// ── Headings ──────────────────────────────────────────────────
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.card-subtitle {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 36px;
+}
+
+.email-highlight {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+// ── OTP digit inputs ──────────────────────────────────────────
+.otp-inputs {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 8px;
+
+  &--error .otp-digit {
+    border-color: #ef4444;
+  }
+}
+
+.otp-digit {
+  width: 52px;
+  height: 56px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: #fff;
+  text-align: center;
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--color-text);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  caret-color: var(--color-primary);
+
+  &:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.12);
+  }
+
+  &:not(:placeholder-shown) {
+    border-color: var(--color-primary);
+    background: #fff9f5;
+  }
+}
+
+.field-error {
+  display: block;
+  text-align: center;
+  margin-bottom: 16px;
+  font-size: 0.75rem;
+  color: #ef4444;
+}
+
+// ── Submit button ─────────────────────────────────────────────
+.btn-primary {
+  width: 100%;
+  height: 50px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  transition: background var(--transition), box-shadow var(--transition);
+
+  &:hover:not(:disabled) {
+    background: var(--color-primary-dk);
+    box-shadow: 0 4px 14px rgba(249, 115, 22, 0.4);
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// ── Resend ────────────────────────────────────────────────────
+.resend-text {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  margin-bottom: 20px;
+}
+
+.resend-countdown {
+  color: var(--color-subtle);
+  font-weight: 500;
+}
+
+.resend-btn {
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: inherit;
+  font-family: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover { text-decoration: underline; }
+}
+
+// ── Back link ─────────────────────────────────────────────────
+.back-link {
+  text-align: center;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8125rem;
+    color: var(--color-muted);
+    text-decoration: none;
+    transition: color var(--transition);
+
+    &:hover { color: var(--color-text); }
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+// ── Right image ───────────────────────────────────────────────
+.promo-image {
+  flex: 1;
+  display: block;
+  height: calc(100vh - 24px);
+  object-fit: cover;
+  object-position: center;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  margin: 12px;
+  border-radius: 20px;
+}
+
+// ── Responsive ────────────────────────────────────────────────
+@media (max-width: 768px) {
+  .otp-page {
+    flex-direction: column;
+  }
+
+  .otp-panel {
+    flex: none;
+    padding: 32px 16px;
+  }
+
+  .otp-card {
+    padding: 32px 24px;
+  }
+
+  .otp-digit {
+    width: 44px;
+    height: 50px;
+    font-size: 1.25rem;
+  }
+
+  .promo-image {
+    display: none;
+  }
+}

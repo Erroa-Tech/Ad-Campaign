@@ -1,0 +1,198 @@
+// ── Host = the promo panel itself ─────────────────────────────
+:host {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 48px 40px;
+  background: linear-gradient(150deg, #ff9060 0%, #f97316 45%, #ea580c 100%);
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -8%;
+    right: -4%;
+    width: 65%;
+    height: 65%;
+    background: rgba(255, 255, 255, 0.07);
+    clip-path: polygon(0 0, 100% 0, 100% 70%, 15% 100%);
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -6%;
+    left: -8%;
+    width: 55%;
+    height: 55%;
+    background: rgba(0, 0, 0, 0.07);
+    clip-path: polygon(25% 0, 100% 15%, 75% 100%, 0 100%);
+    pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+// ── Cards container ───────────────────────────────────────────
+.promo-cards {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.promo-card {
+  background: rgba(255, 255, 255, 0.97);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+// Monthly Spend Summary
+.promo-card--spend {
+  width: min(380px, 90%);
+  padding: 20px 24px;
+
+  .promo-card__title {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 14px;
+  }
+}
+
+.spend-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  border-top: 1px solid var(--color-border);
+
+  &--highlight {
+    background: #fff5ef;
+    margin: 0 -24px;
+    padding: 8px 24px;
+  }
+
+  &__value {
+    font-weight: 600;
+    color: var(--color-text);
+  }
+}
+
+// Total Reach
+.promo-card--reach {
+  width: min(240px, 80%);
+  padding: 22px 28px;
+  align-self: center;
+
+  .reach-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    line-height: 1;
+  }
+
+  .reach-label {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 4px 0;
+  }
+
+  .reach-change {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #22c55e;
+  }
+}
+
+// Budget Used
+.promo-card--budget {
+  width: min(340px, 88%);
+  padding: 16px 20px;
+
+  .budget-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-muted);
+    margin-bottom: 10px;
+
+    span:last-child {
+      font-weight: 600;
+      color: var(--color-text);
+    }
+  }
+
+  .budget-sub {
+    margin-top: 6px;
+    font-size: 0.75rem;
+    color: var(--color-subtle);
+  }
+}
+
+.progress-track {
+  height: 8px;
+  border-radius: 99px;
+  background: #f1f5f9;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: #22c55e;
+}
+
+// ── Footer ────────────────────────────────────────────────────
+.promo-footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: #fff;
+}
+
+.promo-heading {
+  font-size: 1.625rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+
+.promo-desc {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  max-width: 420px;
+  margin: 0 auto 24px;
+}
+
+.promo-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+
+  &--active {
+    width: 24px;
+    border-radius: 99px;
+    background: #fff;
+  }
+}
